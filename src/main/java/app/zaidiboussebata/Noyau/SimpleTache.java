@@ -2,6 +2,6 @@ package app.zaidiboussebata.Noyau;
 
 
 
-public class SimpleTache extends Tache {
+public class SimpleTache extends app.zaidiboussebata.Noyau.Tache {
 
 }

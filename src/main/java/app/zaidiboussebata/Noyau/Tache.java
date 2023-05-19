@@ -1,4 +1,6 @@
-package my_desktop_planner;
+package app.zaidiboussebata.Noyau;
+
+import app.zaidiboussebata.Noyau.*;
 
 import java.io.Serializable;
 import java.time.Duration;
@@ -95,7 +97,7 @@ import java.util.Scanner;
       * @param tacheList
       * @param nomTache
       */
-     static void modifierTache(String fichier,List<Tache> tacheList, String nomTache) {
+    public static void modifieTache(String fichier,List<Tache> tacheList, String nomTache) {
     	 Scanner scanner = new Scanner(System.in);
 
         Tache tacheToModify = null;

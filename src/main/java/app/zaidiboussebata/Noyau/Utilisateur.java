@@ -1,4 +1,4 @@
-package my_desktop_planner;
+package app.zaidiboussebata.Noyau;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -32,7 +32,7 @@ public class Utilisateur implements Serializable{
     /**
      *  permet de la connexion de l'utilisateur par son pseudo
      *  si le pseudo exist donc la connexion est faite sinon elle va affichier un message d'erreur
-     * @param scanner
+     *
      * @param UtilisateurList
      */
     public static void login(String pseudo, List<Utilisateur> UtilisateurList) {
@@ -63,7 +63,7 @@ public class Utilisateur implements Serializable{
     
     /**
      * permert de supprimer l'utilisateur dans le fichier des utilisateurs
-     * @param scanner
+     *
      * @param UtilisateurList
      */
     public static void supprimerUtilisateur(String pseudo, List<Utilisateur> UtilisateurList) {

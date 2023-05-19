@@ -123,7 +123,7 @@
                   <Font name="Verdana Bold" size="36.0" />
                </font>
             </Text>
-            <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="375.0" style="-fx-background-color: #069CAB; -fx-border-color: #FFF; -fx-border-radius: 8;" text="Create an account" textFill="WHITE">
+            <Button fx:id="CreateButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="375.0" style="-fx-background-color: #069CAB; -fx-border-color: #FFF; -fx-border-radius: 8;" text="Create an account" textFill="WHITE">
                <font>
                   <Font name="Verdana" size="14.0" />
                </font></Button>
