@@ -1,4 +1,5 @@
-package my_desktop_planner;
+package app.zaidiboussebata.Noyau;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -47,7 +48,7 @@ public class Creneau_libre implements Serializable{
 //----------------------------------------| createrCreneauLibre |-----------------------------------------------------//
 	 /**
 	  * permet de creer un creneau libre
-	  * @param scanner
+	  *
 	  * @param CreneauLibreList
 	  */
 	 void createrCreneauLibre(String fichier,String debutString,String finString,LocalDate date, List<Creneau_libre> CreneauLibreList) {
@@ -88,7 +89,7 @@ public class Creneau_libre implements Serializable{
 
 	 /**
 	  * permert de supprimer un creneau libre dans le fichier des creneau libre
-	  * @param scanner
+	  *
 	  * @param CreneauLibreList
 	  */
 	 void supprimerCreneauLibre(String fichier,int index, List<Creneau_libre> CreneauLibreList) {
