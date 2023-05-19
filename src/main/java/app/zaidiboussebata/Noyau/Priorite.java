@@ -1,2 +1,9 @@
-package app.zaidiboussebata.Noyau;public class Priorite {
+package app.zaidiboussebata.Noyau;
+
+
+
+public enum Priorite {
+    HEIGHT,
+    MEDUIM,
+    LOW,
 }

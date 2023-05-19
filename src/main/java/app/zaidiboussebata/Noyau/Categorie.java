@@ -1,2 +1,12 @@
-package app.zaidiboussebata.Noyau;public class Categorie {
+package app.zaidiboussebata.Noyau;
+
+
+public enum Categorie {
+    STUDIES,
+    HOBBY,
+    WORK,
+    SPORT,
+    HEALTH,
+
+    //......
 }
