@@ -1,19 +1,26 @@
 package app.zaidiboussebata.Control;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.ZonedDateTime;
 import java.util.*;
+
+import static app.zaidiboussebata.Control.LogInController.navigateTo;
 
 public class CalendrierController implements Initializable {
 
@@ -29,6 +36,8 @@ public class CalendrierController implements Initializable {
     @FXML
     private FlowPane calendar; // Le calendrier
 
+    @FXML
+    private Button tasksButton ;
     /**
      * initialize permet d'inisialisé le calendrier
      *
@@ -178,8 +187,15 @@ public class CalendrierController implements Initializable {
         // la liste des taches a afficher dans le planning
         ZonedDateTime time = ZonedDateTime.of(2023, 05,19 , 16,0,0,0,dateFocus.getZone());
         calendarActivities.add(new CalendarActivity(time , "Client" , 12345));
-        ZonedDateTime time1 = ZonedDateTime.of(2023, 05,21 , 16,0,0,0,dateFocus.getZone());
+        ZonedDateTime time1 = ZonedDateTime.of(2023, 05,19 , 19,0,0,0,dateFocus.getZone());
         calendarActivities.add(new CalendarActivity(time1 , "Yasmine" , 12345));
+        ZonedDateTime time2 = ZonedDateTime.of(2023, 05,19 , 19,0,0,0,dateFocus.getZone());
+        calendarActivities.add(new CalendarActivity(time2 , "Yasmine" , 12345));
+        ZonedDateTime time3 = ZonedDateTime.of(2023, 05,19 , 19,0,0,0,dateFocus.getZone());
+        calendarActivities.add(new CalendarActivity(time3 , "Yasmine" , 12345));
+        ZonedDateTime time4 = ZonedDateTime.of(2023, 05,19 , 19,0,0,0,dateFocus.getZone());
+        calendarActivities.add(new CalendarActivity(time4 , "Yasmine" , 12345));
+
         /*   Random random = new Random();
         for (int i = 0; i < 50; i++) {
             ZonedDateTime time = ZonedDateTime.of(year, month, random.nextInt(27)+1, 16,0,0,0,dateFocus.getZone());
@@ -188,4 +204,12 @@ public class CalendrierController implements Initializable {
 
         return createCalendarMap(calendarActivities);
     }
+
+    public  void navigateTasks(){
+
+   navigateTo(tasksButton,"/app/zaidiboussebata/TacheForm.fxml","Tasks Page" , true) ;
+        TacheController.initialize();
+    }
+
+
 }

@@ -5,40 +5,92 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="642.0" prefWidth="744.0" style="-fx-background-color: #f2fafc;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.zaidiboussebata.Control.CalendrierController">
-    <FlowPane fx:id="calendar" hgap="10.0" layoutX="14.0" layoutY="116.0" prefHeight="498.0" prefWidth="716.0" style="-fx-background-color: #D8DCF7;" vgap="5.0" />
-    <HBox alignment="CENTER" layoutX="163.0" layoutY="14.0" prefHeight="44.0" prefWidth="419.0" spacing="5.0">
-        <children>
-            <Button fx:id="back" mnemonicParsing="false" onAction="#backOneMonth" style="-fx-background-color: #6173EF; -fx-background-radius: 8;" text="&lt;" textFill="WHITE" />
-            <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
-                <font>
-                    <Font size="22.0" />
-                </font>
-            </Text>
-            <Text fx:id="month" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
-                <font>
-                    <Font size="22.0" />
-                </font>
-            </Text>
-            <Button fx:id="forward" mnemonicParsing="false" onAction="#forwardOneMonth" style="-fx-background-color: #6173EF; -fx-background-radius: 8;" text="&gt;" textFill="WHITE" />
-        </children>
-    </HBox>
-    <HBox alignment="CENTER" layoutX="14.0" layoutY="78.0" prefHeight="44.0" prefWidth="716.0" spacing="88.75" style="-fx-background-color: #8478B6;">
-        <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Di" textAlignment="CENTER" />
-            <Text layoutX="213.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lu" textAlignment="CENTER" />
-            <Text layoutX="222.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ma" textAlignment="CENTER" />
-            <Text layoutX="232.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Me" textAlignment="CENTER" />
-            <Text layoutX="241.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Je" textAlignment="CENTER" />
-            <Text layoutX="251.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ven" textAlignment="CENTER" />
-            <Text layoutX="266.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sa" textAlignment="CENTER" />
-        </children>
-        <padding>
-            <Insets right="9.0" />
-        </padding>
-    </HBox>
+<AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #f2fafc;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.zaidiboussebata.Control.CalendrierController">
+<FlowPane fx:id="calendar" hgap="10.0" layoutX="14.0" layoutY="116.0" prefHeight="498.0" prefWidth="716.0" style="-fx-background-color: #D8DCF7;" vgap="5.0" />
+<HBox alignment="CENTER" layoutX="163.0" layoutY="14.0" prefHeight="44.0" prefWidth="419.0" spacing="5.0">
+    <children>
+        <Button fx:id="forward" mnemonicParsing="false" onAction="#forwardOneMonth" style="-fx-background-color: #6173EF; -fx-background-radius: 8;" text="&gt;" textFill="WHITE" />
+        <Text fx:id="year" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Text>
+        <Text fx:id="month" strokeType="OUTSIDE" strokeWidth="0.0" text="####">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Text>
+        <Button fx:id="back" mnemonicParsing="false" onAction="#backOneMonth" style="-fx-background-color: #6173EF; -fx-background-radius: 8;" text="&lt;" textFill="WHITE" />
+    </children>
+</HBox>
+<HBox alignment="CENTER" layoutX="14.0" layoutY="78.0" prefHeight="44.0" prefWidth="716.0" spacing="88.75" style="-fx-background-color: #8478B6;">
+    <children>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Di" textAlignment="CENTER" />
+        <Text layoutX="213.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lu" textAlignment="CENTER" />
+        <Text layoutX="222.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ma" textAlignment="CENTER" />
+        <Text layoutX="232.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Me" textAlignment="CENTER" />
+        <Text layoutX="241.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Je" textAlignment="CENTER" />
+        <Text layoutX="251.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ven" textAlignment="CENTER" />
+        <Text layoutX="266.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sa" textAlignment="CENTER" />
+    </children>
+    <padding>
+        <Insets right="9.0" />
+    </padding>
+</HBox>
+   <VBox alignment="TOP_CENTER" layoutX="743.0" prefHeight="700.0" prefWidth="157.0" style="-fx-background-color: #6173EF;">
+      <children>
+         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="My Desktop">
+            <font>
+               <Font name="Verdana Bold" size="20.0" />
+            </font>
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
+         </Text>
+         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Planner">
+            <font>
+               <Font name="Verdana Bold" size="20.0" />
+            </font>
+         </Text>
+         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="_____">
+            <font>
+               <Font name="Verdana Bold" size="20.0" />
+            </font>
+         </Text>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+         <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Calendar" textFill="WHITE">
+            <font>
+               <Font name="Verdana" size="14.0" />
+            </font>
+         </Button>
+         <Button fx:id="tasksButton" mnemonicParsing="false" onAction="#navigateTasks" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Tasks" textFill="WHITE">
+            <font>
+               <Font name="Verdana" size="14.0" />
+            </font>
+         </Button>
+         <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Schedule" textFill="WHITE">
+            <font>
+               <Font name="Verdana" size="14.0" />
+            </font>
+         </Button>
+         <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Time slot" textFill="WHITE">
+            <font>
+               <Font name="Verdana" size="14.0" />
+            </font>
+         </Button>
+         <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Profile" textFill="WHITE">
+            <font>
+               <Font name="Verdana" size="14.0" />
+            </font>
+         </Button>
+      </children>
+      <padding>
+         <Insets bottom="20.0" left="4.0" right="4.0" top="20.0" />
+      </padding>
+   </VBox>
 
 </AnchorPane>

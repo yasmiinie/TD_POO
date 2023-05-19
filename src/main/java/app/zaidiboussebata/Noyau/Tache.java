@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
- abstract class Tache implements Serializable {
+ public abstract class Tache implements Serializable {
 	 public String nom;
 	 public Duration duree;
      public LocalDate deadline;
@@ -56,7 +56,6 @@ import java.util.Scanner;
          simpleTache.nom = nom;
          simpleTache.duree = Duration.ofMinutes(dureeMinutes);
          simpleTache.deadline = deadline;
-
          simpleTache.priorite = priorite;
          simpleTache.categorie = categorie;
          simpleTache.etat = etat;
@@ -117,7 +116,7 @@ import java.util.Scanner;
             System.out.print("Nouvelle date (yyyy-MM-dd): ");
             String userInput = scanner.nextLine();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            Priorite nouvellePriorite = Priorite.HEIGHT;
+            Priorite nouvellePriorite = Priorite.HIGH;
 
             // Update the task
             tacheToModify.nom = nouveauNom;

@@ -3,7 +3,7 @@ package app.zaidiboussebata.Noyau;
 
 
 public enum Priorite {
-    HEIGHT,
-    MEDUIM,
+    HIGH,
+    MEDIUM,
     LOW,
 }

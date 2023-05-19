@@ -1,5 +1,6 @@
 package app.zaidiboussebata.Control;
 
+import app.zaidiboussebata.Main;
 import app.zaidiboussebata.Noyau.Utilisateur;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,8 +34,9 @@ public class LogInController {
 
 
     private  String pseudo  ;
-    private static final String FICHIER_UTILISATEURS = "utilisateurs.ser";
-    private static final String FICHIER_CRENEAU_LIBRE = "creneaux_libres.ser";
+    public static final String FICHIER_UTILISATEURS = "utilisateurs.ser";
+    public static String FICHIER_CRENEAU_LIBRE ;
+    public static String FICHIER_TACHE ;
 
     @FXML
     private Label ErreurMsg ;// le message derruer dans le cas d'un pseudo non valide
@@ -74,12 +76,15 @@ public class LogInController {
                 onSignupClick();
                 System.out.println("Le pseudo existe déjà. Veuillez en choisir un autre.");
             } else {
+         // lutilisateur a ete creer
 
                 Utilisateur newUtilisateur = new Utilisateur(pseudo);
                 UtilisateurList.add(newUtilisateur);
                 sauvegarderObjetFichier(FICHIER_UTILISATEURS, UtilisateurList);// on sauvgarde le nouveau uti dans le fichier
                 System.out.println("Utilisateur created successfully!");
-                navigateTo(SignUpButton ,"/app/zaidiboussebata/Calendrier-view.fxml" , "Home Page");
+                navigateTo(SignUpButton ,"/app/zaidiboussebata/Calendrier-view.fxml" , "Home Page", true);
+                FICHIER_CRENEAU_LIBRE = pseudo+"creneaux_libres.ser";
+                FICHIER_TACHE = pseudo+"taches.ser";
             }
         }
 
@@ -97,7 +102,7 @@ public class LogInController {
         System.out.println(pseudo);
         if (isPseudoExist(pseudo, UtilisateurList)){
 
-            navigateTo(LogInButton ,"/app/zaidiboussebata/Calendrier-view.fxml" , "Home Page");
+            navigateTo(LogInButton ,"/app/zaidiboussebata/Calendrier-view.fxml" , "Home Page" ,true);
         }
         else {
                 onButtonClick();
@@ -107,15 +112,15 @@ public class LogInController {
     }
 
     public void createAccount(){
-        navigateTo(CreateButton ,"/app/zaidiboussebata/SignUpPage.fxml", "Sign Up Page");
+        navigateTo(CreateButton ,"/app/zaidiboussebata/SignUpPage.fxml", "Sign Up Page", true);
     }
     public void navigateToLogin(){
-    navigateTo(CreatedButton ,"/app/zaidiboussebata/LogInPage.fxml", "Log In Page");
+    navigateTo(CreatedButton ,"/app/zaidiboussebata/LogInPage.fxml", "Log In Page", true);
     }
 
-   public void navigateTo(Button Button ,String path , String title){
+   public static void navigateTo(Button Button ,String path , String title, Boolean close){
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        FXMLLoader loader = new FXMLLoader(LogInController.class.getResource(path));
         Parent root = loader.load();
 
         // Create a new stage
@@ -130,8 +135,11 @@ public class LogInController {
         stage.show();
 
         // Close the current stage (optional)
-        Stage currentStage = (Stage) Button.getScene().getWindow();
-        currentStage.close();
+        if (close){
+
+            Stage currentStage = (Stage) Button.getScene().getWindow();
+            currentStage.close();
+        }
     } catch (IOException e) {
         e.printStackTrace();
     }
