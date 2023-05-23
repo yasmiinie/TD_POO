@@ -2,6 +2,9 @@ package app.zaidiboussebata.Noyau;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.io.Serializable;
 import java.time.Duration;
@@ -51,7 +54,42 @@ public class Creneau_libre implements Serializable{
 	        return Duration.between(debut, fin);
 	 }
 
-//----------------------------------------| createrCreneauLibre |-----------------------------------------------------//
+	//----------------------------------------| orderCreneauList |-----------------------------------------------------//
+
+	/**
+	 * permet d'ordonnee la list des creneaux selon la date,le debut et la fin
+	 * @param creneauList
+	 */
+	public static void orderCreneauList(List<Creneau_libre> creneauList) {
+		// Define a custom Comparator for sorting Creneau_libre objects
+		Comparator<Creneau_libre> creneauComparator = Comparator
+				.comparing(Creneau_libre::getDate) // Sort by date
+				.thenComparing(Creneau_libre::getDebut) // Sort by debut
+				.thenComparing(Creneau_libre::getFin); // Sort by fin
+
+		// Sort the creneauList using the custom Comparator
+		Collections.sort(creneauList, creneauComparator);
+	}
+//----------------------------------------| CreneauxInfDeadline |-----------------------------------------------------//
+	/**
+	 * permet de tri la list des creneaux et nous return une liste de tous les creneaux qui sont inferieure a deadline
+	 * @param creneauLibreList
+	 * @param deadline
+	 * @return liste de tous les creneaux qui sont inferieure a deadline
+	 */
+	public static List<Creneau_libre> CreneauxInfDeadline(List<Creneau_libre> creneauLibreList, LocalDate deadline) {
+		List<Creneau_libre> creneauxInferiorToDeadline = new ArrayList<>();
+
+		for (Creneau_libre creneau : creneauLibreList) {
+			LocalDate creneauDate = creneau.getDate();
+			if (creneauDate.isBefore(deadline)) {
+				creneauxInferiorToDeadline.add(creneau);
+			}
+		}
+
+		return creneauxInferiorToDeadline;
+	}
+	//----------------------------------------| createrCreneauLibre |-----------------------------------------------------//
 
 	/**
 	 *  Permet de creer un creneau libre

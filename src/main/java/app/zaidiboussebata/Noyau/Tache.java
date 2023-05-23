@@ -6,8 +6,7 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 import static app.zaidiboussebata.Noyau.Utilisateur.sauvegarderObjetFichier;
 
@@ -20,9 +19,44 @@ public abstract class Tache implements Serializable {
 	 public Categorie categorie;
 	 public Etat etat;
      public String type;
- 
-     
 
+//----------------------------------------------------------------------------------------
+
+    public static void permuterTachesMemeDeadline(List<SimpleTache> tacheList) {
+        Random random = new Random();
+        int i = 0;
+
+        while (i < tacheList.size() - 1) {
+            SimpleTache currentTache = tacheList.get(i);
+            int j = i + 1;
+
+            while (j < tacheList.size() && currentTache.deadline.isEqual(tacheList.get(j).deadline)) {
+                // Permuter la tâche courante avec une tâche aléatoire ayant la même deadline
+                int randomIndex = random.nextInt(j - i) + i;
+                SimpleTache randomTache = tacheList.get(randomIndex);
+                tacheList.set(randomIndex, currentTache);
+                tacheList.set(i, randomTache);
+
+                j++;
+            }
+
+            i = j;
+        }
+    }
+//-----------------------------------| afficherTaches |------------------------------------//
+    /**
+     * permet d'ordonne la list des taches
+     * @param tacheList
+     */
+    public static void orderTacheList(List<SimpleTache> tacheList) {
+        // Sort the list based on the deadline
+        Collections.sort(tacheList, new Comparator<Tache>() {
+            @Override
+            public int compare(Tache t1, Tache t2) {
+                return t1.deadline.compareTo(t2.deadline);
+            }
+        });
+    }
 //-----------------------------------| afficherTaches |------------------------------------// 
      /**
       * permet d'afficher la list des taches
