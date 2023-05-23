@@ -9,120 +9,120 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #DDDDE8;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.zaidiboussebata.Control.LogInController">
-   <children>
-      <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="577.0" style="-fx-background-color: #069CAB;">
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="10.0" top="20.0" />
-         </padding>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <children>
-            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
-               <font>
-                  <Font name="Verdana Bold" size="24.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello , Welcome">
-               <font>
-                  <Font name="Verdana Bold" size="32.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text=" to your ">
-               <font>
-                  <Font name="Verdana Bold" size="32.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text=" Desktop Planner">
-               <font>
-                  <Font name="Verdana Bold Italic" size="32.0" />
-               </font>
-            </Text>
-            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
-               <font>
-                  <Font name="Verdana Bold" size="24.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
-               <font>
-                  <Font name="Verdana Bold" size="24.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
-               <font>
-                  <Font name="Verdana Bold" size="36.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="You have an account Already ?" textAlignment="JUSTIFY">
-               <font>
-                  <Font name="Verdana" size="14.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
-               <font>
-                  <Font name="Verdana Bold" size="36.0" />
-               </font>
-            </Text>
-            <Button fx:id="CreatedButton" mnemonicParsing="false" onAction="#navigateToLogin" prefHeight="45.0" prefWidth="375.0" style="-fx-background-color: #069CAB; -fx-border-color: #FFF; -fx-border-radius: 8;" text="Log In " textFill="WHITE">
-               <font>
-                  <Font name="Verdana" size="14.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
-      <VBox prefHeight="700.0" prefWidth="404.0" style="-fx-background-color: #DDDDE8;">
-         <children>
-            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up">
-               <font>
-                  <Font name="Verdana Bold" size="32.0" />
-               </font>
-            </Text>
-            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="________">
-               <font>
-                  <Font name="Verdana Bold" size="32.0" />
-               </font>
-            </Text>
-            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
-               <font>
-                  <Font name="Verdana Bold" size="24.0" />
-               </font>
-            </Text>
-            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
-               <font>
-                  <Font name="Verdana Bold" size="24.0" />
-               </font>
-            </Text>
-            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
-               <font>
-                  <Font name="Verdana Bold" size="24.0" />
-               </font>
-            </Text>
-            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your UserName">
-               <font>
-                  <Font name="Verdana" size="14.0" />
-               </font>
-            </Text>
-            <TextField fx:id="signupField" prefHeight="32.0" prefWidth="323.0" />
-            <Label fx:id="ErreurPseudo" textFill="#e83737">
-               <font>
-                  <Font name="Verdana" size="13.0" />
-               </font>
-            </Label>
-            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
-               <font>
-                  <Font name="Verdana Bold" size="24.0" />
-               </font>
-            </Text>
-            <Button fx:id="SignUpButton" mnemonicParsing="false" onAction="#signUp" prefHeight="41.0" prefWidth="323.0" style="-fx-background-color: #F69CA7; -fx-background-radius: 8;" text="Sign Up" textFill="#17207f">
-               <font>
-                  <Font name="Verdana Bold" size="14.0" />
-               </font>
-            </Button>
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="70.0" />
-         </padding>
-      </VBox>
-   </children>
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0"
+      prefWidth="900.0" style="-fx-background-color: #DDDDE8;" xmlns="http://javafx.com/javafx/19"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.zaidiboussebata.Control.LogInController">
+   <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="577.0" style="-fx-background-color: #069CAB;">
+      <padding>
+         <Insets bottom="20.0" left="20.0" right="10.0" top="20.0"/>
+      </padding>
+      <opaqueInsets>
+         <Insets/>
+      </opaqueInsets>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana Bold" size="24.0"/>
+         </font>
+      </Text>
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello , Welcome">
+         <font>
+            <Font name="Verdana Bold" size="32.0"/>
+         </font>
+      </Text>
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text=" to your ">
+         <font>
+            <Font name="Verdana Bold" size="32.0"/>
+         </font>
+      </Text>
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text=" Desktop Planner">
+         <font>
+            <Font name="Verdana Bold Italic" size="32.0"/>
+         </font>
+      </Text>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana Bold" size="24.0"/>
+         </font>
+      </Text>
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana Bold" size="24.0"/>
+         </font>
+      </Text>
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana Bold" size="36.0"/>
+         </font>
+      </Text>
+      <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0"
+            text="You have an account Already ?" textAlignment="JUSTIFY">
+         <font>
+            <Font name="Verdana" size="14.0"/>
+         </font>
+      </Text>
+      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana Bold" size="36.0"/>
+         </font>
+      </Text>
+      <Button fx:id="CreatedButton" mnemonicParsing="false" onAction="#navigateToLogin" prefHeight="45.0"
+              prefWidth="375.0" style="-fx-background-color: #069CAB; -fx-border-color: #FFF; -fx-border-radius: 8;"
+              text="Log In " textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0"/>
+         </font>
+      </Button>
+   </VBox>
+   <VBox prefHeight="700.0" prefWidth="404.0" style="-fx-background-color: #DDDDE8;">
+      <padding>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="70.0"/>
+      </padding>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up">
+         <font>
+            <Font name="Verdana Bold" size="32.0"/>
+         </font>
+      </Text>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="________">
+         <font>
+            <Font name="Verdana Bold" size="32.0"/>
+         </font>
+      </Text>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana Bold" size="24.0"/>
+         </font>
+      </Text>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana Bold" size="24.0"/>
+         </font>
+      </Text>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana Bold" size="24.0"/>
+         </font>
+      </Text>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your UserName">
+         <font>
+            <Font name="Verdana" size="14.0"/>
+         </font>
+      </Text>
+      <TextField fx:id="signupField" prefHeight="32.0" prefWidth="323.0"/>
+      <Label fx:id="ErreurPseudo" textFill="#e83737">
+         <font>
+            <Font name="Verdana" size="13.0"/>
+         </font>
+      </Label>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana Bold" size="24.0"/>
+         </font>
+      </Text>
+      <Button fx:id="SignUpButton" mnemonicParsing="false" onAction="#signUp" prefHeight="41.0" prefWidth="323.0"
+              style="-fx-background-color: #F69CA7; -fx-background-radius: 8;" text="Sign Up" textFill="#17207f">
+         <font>
+            <Font name="Verdana Bold" size="14.0"/>
+         </font>
+      </Button>
+   </VBox>
 </HBox>

@@ -33,7 +33,7 @@ public class LogInController {
     private TextField signupField ;// le pseudo entere dans le sign up
 
 
-    private  String pseudo  ;
+    public static  String pseudo  ;
     public static final String FICHIER_UTILISATEURS = "utilisateurs.ser";
     public static String FICHIER_CRENEAU_LIBRE ;
     public static String FICHIER_TACHE ;
@@ -55,8 +55,13 @@ public class LogInController {
     protected void onSignupClick() {
        ErreurPseudo.setText("This user name is already used ! Try again");
     }
+   public  List<Utilisateur> UtilisateurList ;
 
-    List<Utilisateur> UtilisateurList = recupererObjetFichier(FICHIER_UTILISATEURS);
+    public  void initialize() {
+
+        UtilisateurList  = recupererObjetFichier(FICHIER_UTILISATEURS);
+
+    }
     //---------------------SignUp ----------------------------
     public void signUp(){
       //  supprimerUtilisateur("", UtilisateurList) ;
@@ -84,7 +89,7 @@ public class LogInController {
                 System.out.println("Utilisateur created successfully!");
                 navigateTo(SignUpButton ,"/app/zaidiboussebata/Calendrier-view.fxml" , "Home Page", true);
                 FICHIER_CRENEAU_LIBRE = pseudo+"creneaux_libres.ser";
-                FICHIER_TACHE = pseudo+"taches.ser";
+                FICHIER_TACHE = pseudo+"_taches.ser";
             }
         }
 
@@ -99,9 +104,9 @@ public class LogInController {
      */
     public void logIn() throws IOException {
         pseudo = textField.getText();
-        System.out.println(pseudo);
-        if (isPseudoExist(pseudo, UtilisateurList)){
 
+        if (isPseudoExist(pseudo, UtilisateurList)){
+            FICHIER_TACHE = pseudo+"_taches.ser";
             navigateTo(LogInButton ,"/app/zaidiboussebata/Calendrier-view.fxml" , "Home Page" ,true);
         }
         else {
@@ -212,10 +217,12 @@ public class LogInController {
      * @param nomFichier  Le nom du fichier
      * @param objetList   La liste d'objets à sauvegarder
      */
-    private static <T> void sauvegarderObjetFichier(String nomFichier, List<T> objetList) {
+    public static <T> void sauvegarderObjetFichier(String nomFichier, List<T> objetList) {
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(nomFichier))) {
             outputStream.writeObject(objetList);
         } catch (IOException e) {
+            System.out.println("EXCEPTION");
+
             e.printStackTrace();
             // Gérer l'exception en conséquence
         }

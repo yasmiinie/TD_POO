@@ -155,11 +155,13 @@ public static void afficherUtilisateurs(List<Utilisateur> utilisateurList) {
    * @param nomFichier  Le nom du fichier
    * @param objetList   La liste d'objets à sauvegarder
    */
-  public static <T> void sauvegarderObjetFichier(String nomFichier, List<T> objetList) {
+  public static <T> Boolean sauvegarderObjetFichier(String nomFichier, List<T> objetList) {
       try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(nomFichier))) {
           outputStream.writeObject(objetList);
+          return true;
       } catch (IOException e) {
           e.printStackTrace();
+          return false ;
           // Gérer l'exception en conséquence
       }
   }

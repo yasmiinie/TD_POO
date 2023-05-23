@@ -1,105 +1,98 @@
 package app.zaidiboussebata.Control;
-
-import app.zaidiboussebata.Noyau.Categorie;
-import app.zaidiboussebata.Noyau.SimpleTache;
-import app.zaidiboussebata.Noyau.Tache;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import app.zaidiboussebata.Noyau.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.List;
-
 import static app.zaidiboussebata.Control.LogInController.navigateTo;
 import static app.zaidiboussebata.Control.LogInController.*;
 
+
 public class TacheController {
-    @FXML
-    private static ListView<SimpleTache> tacheliste;
-
-    public static void initialize() {
-        List<SimpleTache> objetList = recupererObjetFichier(FICHIER_TACHE);
-        ObservableList<SimpleTache> observableList = FXCollections.observableArrayList(objetList);
-        tacheliste.setItems(observableList);
-    }
-    int type = 1 ; //par defaut cest une tache simple
-    int categorie = 0 ; //par defaut cest une other
-
-    int priorite = 1 ; //par defaut cest une High
 
     @FXML
-    private Button ajouterButton;
+    public Button createBut;
+    //--------------------------------------------------------------------------------
+    public Button  tasksButton;
+    @FXML
+    public Button  timeSlotButton;
+    @FXML
+    public Button calendartButton ;
+    @FXML
+    public Button  profileButton;
+    @FXML
+    public Button  scheduleButton;
+
+
+    //--------------------------------------------------------------------------------
 
     @FXML
-    private  Button createButton;
+    public  void navigateTasks(ActionEvent event){
+
+        navigateTo(tasksButton,"/app/zaidiboussebata/TachePage.fxml","Tasks Page" , true) ;
+        //    TacheController.initialize();
+    }
     @FXML
-    public TextField tacheName;
+    public  void navigateTimeSlot(ActionEvent event){
+        navigateTo(timeSlotButton, "/app/zaidiboussebata/FreeSlotPage.fxml","Time Slot Page" , true) ;
+    }
     @FXML
-    public TextField tacheDuration;
+    public  void navigateCalendar(ActionEvent event){
+        navigateTo(calendartButton,"/app/zaidiboussebata/Calendrier-view.fxml","Home Page" , true) ;
+    }
     @FXML
-    public DatePicker tacheDDL;
+    public  void navigateProfile(ActionEvent event){
+        navigateTo(profileButton,"/app/zaidiboussebata/ProfilePage.fxml","Profile Page" , true) ;
+
+    }
+    @FXML
+    public  void navigateSchedule(ActionEvent event){
+        navigateTo(profileButton,"/app/zaidiboussebata/SchedulePage.fxml","Schedule Page" , true) ;
+
+    }
+    //_---------------------------------------------------------
+
+
 
     @FXML
-    public MenuBar typeMenu;
+    public  ListView<String> liste ;
 
-    // ----------------------------Les priorites---------------------------
 
-    public void HighClicked(){
-        priorite = 1;
-    }
+    /**
+     * permet  l'initialisation de la liste a partir du fichier
+     *
+     */
+    public  void initialize() {
+        liste.getItems().clear();
 
-    public void MediumClicked(){
-        priorite = 2;
-    }
-    public void LowClicked(){
-        priorite = 3;
-    }
-    // ----------------------------Les categories---------------------------
+        List<SimpleTache> tacheList = recupererObjetFichier(pseudo+"_taches.ser");
 
-    public void OtherClicked(){
-        categorie = 0;
-    }
-    public void StudiesClicked(){
-        categorie = 1;
-    }
-    public void HobbyClicked(){
-        categorie = 2;
-    }
-    public void WorkClicked(){
-        categorie = 3;
-    }
-    public void SportClicked(){
-        categorie = 4;
-    }
-    public void HealthClicked(){
-        categorie = 5;
-    }
+        for (int i = 0; i < tacheList.size(); i++) {
+            SimpleTache simple = tacheList.get(i);
+            liste.getItems().add("Task 0"+(i + 1)+ " : " +simple.nom);
+            liste.getItems().add("            -Type : "+simple.type);
+            liste.getItems().add("            -Priority : "+simple.priorite.toString());
+            liste.getItems().add("            -Duration : "+simple.duree);
+            liste.getItems().add("            -State : "+simple.etat);
+            liste.getItems().add("            -Category : "+simple.categorie);
+            liste.getItems().add("             -DeadLine : "+simple.deadline);
+            liste.getItems().add("                                 ");
 
-    public void ajouterTache(){
-        navigateTo(ajouterButton,"/app/zaidiboussebata/TacheForm.fxml","add a task",false);
-    }
-   public void simpleButtonClicked(){
-       type = 1;
-
-   }
-   public void decomposableButtonClicked(){
-       type = 2;
+        }
 
     }
-   public void addtoliste(){
-     //  navigateTo(ajouterButton,"/app/zaidiboussebata/TachePage.fxml","add a task",true);
-     //  tacheliste.getItems().add(tacheName.getText());
-     //---------------------------------------------------------------------------------
+    public void addClick(ActionEvent event){
+    navigateTo( createBut , "/app/zaidiboussebata/addTask.fxml", "Create a Task" , false);
 
-    //   SimpleTache newTache = new SimpleTache();  // Create a new Tache object
-
-    //   ObservableList<SimpleTache> observableList = tacheliste.getItems();  // Retrieve the ObservableList
-    //   observableList.add(newTache);
-       System.out.println( tacheDDL.getValue());
-       System.out.println( tacheDuration.getText());
-       System.out.println( tacheName.getText());
-       System.out.println( type);
-       System.out.println(categorie);
-       System.out.println(priorite);
     }
+    public void removeClick(ActionEvent event){
+        navigateTo( createBut , "/app/zaidiboussebata/removeTask.fxml", "Remove a Task" , false);
+    }
+
+    public void editClick(ActionEvent event){
+        navigateTo( createBut , "/app/zaidiboussebata/editTask.fxml", "Edit a Task" , false);
+    }
+
+
 }

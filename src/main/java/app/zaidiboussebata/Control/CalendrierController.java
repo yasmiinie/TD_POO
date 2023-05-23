@@ -2,10 +2,7 @@ package app.zaidiboussebata.Control;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
@@ -13,14 +10,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.ZonedDateTime;
 import java.util.*;
 
-import static app.zaidiboussebata.Control.LogInController.navigateTo;
+import static app.zaidiboussebata.Control.LogInController.*;
 
 public class CalendrierController implements Initializable {
 
@@ -35,9 +30,20 @@ public class CalendrierController implements Initializable {
 
     @FXML
     private FlowPane calendar; // Le calendrier
-
+//---------------------Nav bar-----------------------------
     @FXML
-    private Button tasksButton ;
+    public Button tasksButton ;
+    @FXML
+    public Button calendartButton ;
+    @FXML
+    public Button timeSlotButton ;
+    @FXML
+    public Button  profileButton;
+    @FXML
+    public Button  scheduleButton;
+
+    //----------------------------------------------------------------------------------------------------
+
     /**
      * initialize permet d'inisialisé le calendrier
      *
@@ -51,9 +57,9 @@ public class CalendrierController implements Initializable {
         today = ZonedDateTime.now();
         drawCalendar();
     }
-
+//--------------------------------------------------------
     /**
-     *
+     * Revient un mois en arriere
      *
      * @param event
      */
@@ -64,12 +70,18 @@ public class CalendrierController implements Initializable {
         drawCalendar();
     }
 
+    /**
+     *  revient un mois en avant
+     *
+     * @param event
+     */
     @FXML
     void forwardOneMonth(ActionEvent event) {
         dateFocus = dateFocus.plusMonths(1);
         calendar.getChildren().clear();
         drawCalendar();
     }
+
     /**
      *
      * drawCalendar :Permet d'afficher le calendrier en question
@@ -77,8 +89,6 @@ public class CalendrierController implements Initializable {
      * elle utilise des variable globales dinc pas besoin d'entree
      *
      * */
-
-
     private void drawCalendar(){
         year.setText(String.valueOf(dateFocus.getYear()));
         month.setText(String.valueOf(dateFocus.getMonth()));
@@ -205,10 +215,31 @@ public class CalendrierController implements Initializable {
         return createCalendarMap(calendarActivities);
     }
 
-    public  void navigateTasks(){
+    @FXML
+    public  void navigateTasks(ActionEvent event){
 
-   navigateTo(tasksButton,"/app/zaidiboussebata/TacheForm.fxml","Tasks Page" , true) ;
-        TacheController.initialize();
+   navigateTo(tasksButton,"/app/zaidiboussebata/TachePage.fxml","Tasks Page" , true) ;
+    //    TacheController.initialize();
+    }
+
+    @FXML
+    public  void navigateTimeSlot(ActionEvent event){
+        FICHIER_CRENEAU_LIBRE = pseudo+"_creneau.ser" ;
+        navigateTo(timeSlotButton, "/app/zaidiboussebata/FreeSlotPage.fxml","Time Slot Page" , true) ;
+    }
+    @FXML
+    public  void navigateCalendar(ActionEvent event){
+        navigateTo(calendartButton,"/app/zaidiboussebata/Calendrier-view.fxml","Home Page" , true) ;
+    }
+    @FXML
+    public  void navigateProfile(ActionEvent event){
+        navigateTo(profileButton,"/app/zaidiboussebata/ProfilePage.fxml","Profile Page" , true) ;
+
+    }
+    @FXML
+    public  void navigateSchedule(ActionEvent event){
+        navigateTo(profileButton,"/app/zaidiboussebata/SchedulePage.fxml","Schedule Page" , true) ;
+
     }
 
 

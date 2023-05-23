@@ -62,7 +62,7 @@
             </font>
          </Text>
          <Text strokeType="OUTSIDE" strokeWidth="0.0" />
-         <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Calendar" textFill="WHITE">
+         <Button fx:id="calendartButton" mnemonicParsing="false" onAction="#navigateCalendar" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Calendar" textFill="WHITE">
             <font>
                <Font name="Verdana" size="14.0" />
             </font>
@@ -72,17 +72,22 @@
                <Font name="Verdana" size="14.0" />
             </font>
          </Button>
-         <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Schedule" textFill="WHITE">
+         <Button fx:id="profileButton1" mnemonicParsing="false" onAction="#navigateProfile" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Projects" textFill="WHITE">
             <font>
                <Font name="Verdana" size="14.0" />
             </font>
          </Button>
-         <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Time slot" textFill="WHITE">
+         <Button fx:id="timeSlotButton" mnemonicParsing="false" onAction="#navigateTimeSlot" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Free Slot" textFill="WHITE">
             <font>
                <Font name="Verdana" size="14.0" />
             </font>
          </Button>
-         <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Profile" textFill="WHITE">
+         <Button fx:id="scheduleButton" mnemonicParsing="false" onAction="#navigateSchedule" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Schedule" textFill="WHITE">
+            <font>
+               <Font name="Verdana" size="14.0" />
+            </font>
+         </Button>
+         <Button fx:id="profileButton" mnemonicParsing="false" onAction="#navigateProfile" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Profile" textFill="WHITE">
             <font>
                <Font name="Verdana" size="14.0" />
             </font>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.zaidiboussebata.Control.AddTacheController">
+   <padding>
+      <Insets bottom="30.0" left="70.0" right="70.0" top="30.0" />
+   </padding>
+   <children>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit a task">
+         <font>
+            <Font name="Verdana Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="______">
+         <font>
+            <Font name="Verdana Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana Bold" size="24.0" />
+         </font>
+      </Text>
+      <GridPane prefWidth="472.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="273.3743896484375" minWidth="10.0" prefWidth="169.02294921875" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="419.1378173828125" minWidth="10.0" prefWidth="290.97705078125" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Task's name :">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tacheID" GridPane.columnIndex="1" />
+            <Label fx:id="TaskErreur" prefHeight="16.0" prefWidth="289.0" textFill="#e83737" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Verdana" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Text>
+      <GridPane alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.43466186523438" minWidth="10.0" prefWidth="162.5" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="380.1123352050781" minWidth="10.0" prefWidth="277.5" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="  Name : " GridPane.columnIndex="5" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="  Type : " GridPane.columnIndex="5" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="  Duration &quot;HH:MM&quot; " GridPane.columnIndex="5" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="  DeadLine : " GridPane.columnIndex="5" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Text>
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="  Category : " GridPane.columnIndex="5" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Text>
+            <TextField fx:id="tacheName" prefHeight="26.0" prefWidth="331.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <MenuButton fx:id="typeM" alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="344.0" style="-fx-background-color: #D8DCF7;" text="Type" textFill="#8478b6" GridPane.columnIndex="6" GridPane.rowIndex="3">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#simpleButtonClicked" text="Simple" />
+                  <MenuItem mnemonicParsing="false" onAction="#decomposableButtonClicked" text="Decomposable" />
+               </items>
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </MenuButton>
+            <TextField fx:id="tacheDuree" prefHeight="26.0" prefWidth="331.0" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+            <DatePicker fx:id="ddl" prefHeight="26.0" prefWidth="291.0" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="  Priority : " GridPane.columnIndex="5" GridPane.rowIndex="7">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Text>
+            <MenuButton fx:id="priorities" alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="344.0" style="-fx-background-color: #D8DCF7;" text="Priorities" textFill="#8478b6" GridPane.columnIndex="6" GridPane.rowIndex="7">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#HighClicked" text="High" />
+                  <MenuItem mnemonicParsing="false" onAction="#MediumClicked" text="Medium" />
+                  <MenuItem mnemonicParsing="false" onAction="#LowClicked" text="Low" />
+               </items>
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </MenuButton>
+            <MenuButton fx:id="categories" alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="344.0" style="-fx-background-color: #D8DCF7;" text="Categories" textFill="#8478b6" GridPane.columnIndex="6" GridPane.rowIndex="6">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#StudiesClicked" text="Study" />
+                  <MenuItem mnemonicParsing="false" onAction="#HobbyClicked" text="Hobby" />
+                  <MenuItem mnemonicParsing="false" onAction="#WorkClicked" text="Work" />
+                  <MenuItem mnemonicParsing="false" onAction="#SportClicked" text="Sport" />
+                  <MenuItem mnemonicParsing="false" onAction="#HealthClicked" text="Health" />
+                  <MenuItem mnemonicParsing="false" onAction="#OtherClicked" text="Other" />
+               </items>
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </MenuButton>
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Task's fields to edit:" wrappingWidth="181.56646728515625" GridPane.columnIndex="5">
+               <font>
+                  <Font name="Verdana Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="181.56646728515625" GridPane.columnIndex="5" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Verdana Bold" size="10.0" />
+               </font>
+            </Text>
+            <CheckBox fx:id="checkName" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <CheckBox fx:id="checkCat" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <CheckBox fx:id="checkPri" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <CheckBox fx:id="checkDDL" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <CheckBox fx:id="checkDuree" mnemonicParsing="false" prefHeight="16.0" prefWidth="18.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <CheckBox fx:id="checkType" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="  State : " GridPane.columnIndex="5" GridPane.rowIndex="8">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Text>
+            <CheckBox fx:id="checkState" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+            <MenuButton fx:id="states" alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="344.0" style="-fx-background-color: #D8DCF7;" text="States" textFill="#8478b6" GridPane.columnIndex="6" GridPane.rowIndex="8">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#UnscheduledClicked" text="Unscheduled" />
+                  <MenuItem mnemonicParsing="false" onAction="#RealizedClicked" text="Not realized" />
+                  <MenuItem mnemonicParsing="false" onAction="#CompletedClicked" text="Completed" />
+                  <MenuItem mnemonicParsing="false" onAction="#InProgressClicked" text="In Progress" />
+                  <MenuItem mnemonicParsing="false" onAction="#CancelledClicked" text="Cancelled" />
+                  <MenuItem mnemonicParsing="false" onAction="#DelayedClicked" text="Delayed" />
+               </items>
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </MenuButton>
+         </children>
+      </GridPane>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="181.56646728515625">
+         <font>
+            <Font name="Verdana Bold" size="36.0" />
+         </font>
+      </Text>
+      <Button fx:id="editBut" mnemonicParsing="false" onAction="#editTache" prefHeight="27.0" prefWidth="332.0" style="-fx-background-radius: 7; -fx-background-color: #17207F;" text="Submit" textFill="WHITE">
+         <font>
+            <Font name="Verdana Bold" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</VBox>

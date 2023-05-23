@@ -7,16 +7,22 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 
+import static app.zaidiboussebata.Noyau.Utilisateur.sauvegarderObjetFichier;
+
 
 public class Creneau_libre implements Serializable{
 	private LocalTime debut;
 	private LocalTime fin;
     private LocalDate date;
-	public static Duration  dureeMin = Duration.ofMinutes(30);
+	public static Duration dureeMin = Duration.ofMinutes(30);
 
 	
 //------------------------------| Constructeur |------------------------------------------------//	
-		
+		public Creneau_libre(){
+
+		}
+
+
 		public Creneau_libre(LocalTime debut,LocalTime fin,LocalDate date) {
 			// TODO Auto-generated constructor stub
 			this.debut = debut;
@@ -26,11 +32,11 @@ public class Creneau_libre implements Serializable{
 		}	
 //------------------------------| Getters setters |------------------------------------------------//	
 		public LocalDate getDate() {return date;}
-		public void getDate(LocalDate date) {		this.date = date;	}
+		public void setDate(LocalDate date) {		this.date = date;	}
 		public LocalTime getDebut() {		return debut;	}
-		public void getDebut(LocalTime debut) {		this.debut = debut;	}
+		public void setDebut(LocalTime debut) {		this.debut = debut;	}
 		public LocalTime getFin() {		return fin;	}
-		public void getFin(LocalTime fin) {		this.fin = fin;	}
+		public void setFin(LocalTime fin) {		this.fin = fin;	}
 
 
 //------------------------------| calculeDuree  |------------------------------------------------//			
@@ -46,25 +52,34 @@ public class Creneau_libre implements Serializable{
 	 }
 
 //----------------------------------------| createrCreneauLibre |-----------------------------------------------------//
-	 /**
-	  * permet de creer un creneau libre
-	  *
-	  * @param CreneauLibreList
-	  */
-	 void createrCreneauLibre(String fichier,String debutString,String finString,LocalDate date, List<Creneau_libre> CreneauLibreList) {
 
-	     LocalTime debut = LocalTime.parse(debutString, DateTimeFormatter.ofPattern("HH:mm"));
-	     LocalTime fin = LocalTime.parse(finString, DateTimeFormatter.ofPattern("HH:mm"));
-	     Duration duree = Creneau_libre.calculeDuree(debut, fin);
+	/**
+	 *  Permet de creer un creneau libre
+	 * @param fichier le fichier
+	 * @param debut
+	 * @param fin
+	 * @param date
+	 * @param CreneauLibreList
+	 */
+	 public Boolean createrCreneauLibre(String fichier,LocalTime debut  ,LocalTime fin,LocalDate date, List<Creneau_libre> CreneauLibreList) {
 
-	     if (duree.compareTo(Creneau_libre.dureeMin) < 0) {
+		 Duration duree = Creneau_libre.calculeDuree(debut, fin);
+		 System.out.println(debut);
+		 System.out.println(fin);
+		 System.out.println("duree ===="+duree);
+
+
+		 if (duree.compareTo(Creneau_libre.dureeMin) < 0) {
 	         System.out.println("La durée du créneau libre est inférieure à la durée minimale requise.");
-	         return;
+	         return false;
 	     }
-	     
-	     Creneau_libre newCreneauLibre = new Creneau_libre(debut, fin,date);
-	     CreneauLibreList.add(newCreneauLibre);
-	     Utilisateur.sauvegarderObjetFichier(fichier, CreneauLibreList);
+	     else {
+			 Creneau_libre newCreneauLibre = new Creneau_libre(debut, fin,date);
+			 CreneauLibreList.add(newCreneauLibre);
+		     sauvegarderObjetFichier(fichier, CreneauLibreList);
+			 return true ;
+		 }
+
 	 }
 
 //-------------------------------------| afficherCreneauxLibres |-----------------------------------//
@@ -98,7 +113,7 @@ public class Creneau_libre implements Serializable{
 	     if (index >= 0 && index < CreneauLibreList.size()) {
 	         Creneau_libre creneauLibre = CreneauLibreList.get(index);
 	         CreneauLibreList.remove(index);
-	         Utilisateur.sauvegarderObjetFichier(fichier, CreneauLibreList);
+	         sauvegarderObjetFichier(fichier, CreneauLibreList);
 	         System.out.println("Créneau libre supprimé avec succès : " + creneauLibre);
 	     } else {
 	         System.out.println("Indice invalide. Suppression du créneau libre échouée.");
