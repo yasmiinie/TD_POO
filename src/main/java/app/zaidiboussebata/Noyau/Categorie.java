@@ -2,6 +2,8 @@ package app.zaidiboussebata.Noyau;
 
 
 public enum Categorie {
+
+    // enumeration pour les categories
     STUDIES, // 1
     HOBBY, //2
     WORK, //3
