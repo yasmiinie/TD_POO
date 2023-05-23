@@ -1,5 +1,4 @@
-package my_desktop_planner;
-
+package app.zaidiboussebata.Noyau;
 public class SimpleTache extends Tache {
 
 }
