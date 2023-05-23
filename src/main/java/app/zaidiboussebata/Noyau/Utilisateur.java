@@ -1,4 +1,4 @@
-package app.zaidiboussebata.Noyau;
+package my_desktop_planner;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+import java.util.Scanner;
 
 
 public class Utilisateur implements Serializable{
@@ -32,7 +32,7 @@ public class Utilisateur implements Serializable{
     /**
      *  permet de la connexion de l'utilisateur par son pseudo
      *  si le pseudo exist donc la connexion est faite sinon elle va affichier un message d'erreur
-     *
+     * @param pseudo
      * @param UtilisateurList
      */
     public static void login(String pseudo, List<Utilisateur> UtilisateurList) {
@@ -63,7 +63,7 @@ public class Utilisateur implements Serializable{
     
     /**
      * permert de supprimer l'utilisateur dans le fichier des utilisateurs
-     *
+     * @param scanner
      * @param UtilisateurList
      */
     public static void supprimerUtilisateur(String pseudo, List<Utilisateur> UtilisateurList) {
@@ -155,17 +155,14 @@ public static void afficherUtilisateurs(List<Utilisateur> utilisateurList) {
    * @param nomFichier  Le nom du fichier
    * @param objetList   La liste d'objets à sauvegarder
    */
-  public static <T> Boolean sauvegarderObjetFichier(String nomFichier, List<T> objetList) {
+  public static <T> void sauvegarderObjetFichier(String nomFichier, List<T> objetList) {
       try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(nomFichier))) {
           outputStream.writeObject(objetList);
-          return true;
       } catch (IOException e) {
           e.printStackTrace();
-          return false ;
           // Gérer l'exception en conséquence
       }
   }
 
 	
 }
-

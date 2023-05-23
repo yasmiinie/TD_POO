@@ -1,14 +1,13 @@
-package app.zaidiboussebata.Noyau;
-
+package my_desktop_planner;
 
 public enum Etat {
-    NON_REALISEE,
-    COMPLETED,
-    IN_PROGRESS,
-    CANCELLED,
-    DELAYED,
-    UNSCHEDULED,
-
+	 NON_REALISEE,
+     COMPLETED,
+     IN_PROGRESS,
+     CANCELLED,
+     DELAYED,
+     UNSCHEDULED,
+   
 }
 /*
  * public enum Etat {
@@ -35,4 +34,3 @@ public enum Etat {
         return color;
     }
 }*/
-

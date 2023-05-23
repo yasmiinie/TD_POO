@@ -1,9 +1,7 @@
-package app.zaidiboussebata.Noyau;
-
-
+package my_desktop_planner;
 
 public enum Priorite {
-    HIGH,
-    MEDIUM,
+    HEIGHT,
+    MEDUIM,
     LOW,
 }
