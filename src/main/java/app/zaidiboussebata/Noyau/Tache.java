@@ -1,15 +1,18 @@
 package app.zaidiboussebata.Noyau;
-import java.io.Serializable; 
+
+import app.zaidiboussebata.Noyau.*;
+
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.*;
+import java.util.List;
 import java.util.Scanner;
 
+import static app.zaidiboussebata.Noyau.Utilisateur.sauvegarderObjetFichier;
 
- abstract class Tache implements Serializable {
+
+public abstract class Tache implements Serializable {
 	 public String nom;
 	 public Duration duree;
      public LocalDate deadline;
@@ -17,47 +20,22 @@ import java.util.Scanner;
 	 public Categorie categorie;
 	 public Etat etat;
      public String type;
-
-
-  // Getter and setter for the duree field
-     public Duration getDuree() {
-         return duree;
-     }
+ 
      
-     public void setDuree(Duration duree) {
-         this.duree = duree;
-     }
 
-
-
-//-----------------------------------| afficherTaches |------------------------------------// 
-     /**
-      * permet d'ordonne la list des taches
-      * @param tacheList
-      */
-     public static void orderTacheList(List<SimpleTache> tacheList) {
-         // Sort the list based on the deadline
-         Collections.sort(tacheList, new Comparator<Tache>() {
-             @Override
-             public int compare(Tache t1, Tache t2) {
-                 return t1.deadline.compareTo(t2.deadline);
-             }
-         });
-     }
-     
 //-----------------------------------| afficherTaches |------------------------------------// 
      /**
       * permet d'afficher la list des taches
       * @param tacheList
       */
-     static void afficherTaches(List<SimpleTache> tacheList) {
+     public static void afficherTaches(List<SimpleTache> tacheList) {
     	    System.out.println("Liste des tâches :");
     	    if (tacheList.size() != 0) {
     	        for (int i = 0; i < tacheList.size(); i++) {
     	            Tache tache = tacheList.get(i);
-    	            System.out.println("Tâche " + (i + 1) + ": |" + tache.nom + "| , Durée: |" + tache.duree +
-    	                    "| , Priorité: |" + tache.priorite +"| ,Deadline: |"+tache.deadline+ "| , Catégorie: |" + tache.categorie +
-    	                    "| , État: |" + tache.etat + "| , Type: |" + tache.type);
+    	            System.out.println("Tâche " + (i + 1) + ": " + tache.nom + ", Durée: " + tache.duree +
+    	                    ", Priorité: " + tache.priorite +",Deadline: "+tache.deadline+ ", Catégorie: " + tache.categorie +
+    	                    ", État: " + tache.etat + ", Type: " + tache.type);
     	        }
     	    } else {
     	        System.out.println("Votre liste des tâches est vide.");
@@ -67,7 +45,7 @@ import java.util.Scanner;
 //-----------------------------------| CreerTache |------------------------------------//     
      /**
       * permet de creer une tache (ajouter la tache dans la list des taches)
-      * @param tacheList
+      *
       * @param nom
       * @param dureeMinutes
       * @param deadline
@@ -75,21 +53,19 @@ import java.util.Scanner;
       * @param categorie
       * @param etat
       */
-     static void CreerTache(List<SimpleTache> tacheList, String nom, long dureeMinutes,LocalDate deadline,Priorite priorite,Categorie categorie,Etat etat ) {
-    	 SimpleTache simpleTache = new SimpleTache();
-         simpleTache.nom = nom;
-         simpleTache.duree = Duration.ofMinutes(dureeMinutes);
-         simpleTache.deadline = deadline;
+     public void CreerTache( String nom, long dureeMinutes,LocalDate deadline,Priorite priorite,Categorie categorie,Etat etat, String type ) {
 
-         simpleTache.priorite = priorite;
-         simpleTache.categorie = categorie;
-         simpleTache.etat = etat;
-         simpleTache.type = "Simple";
+         this.nom = nom;
+         this.duree = Duration.ofMinutes(dureeMinutes);
+         this.deadline = deadline;
+         this.priorite = priorite;
+         this.categorie = categorie;
+         this.etat = etat;
+         this.type = type;
 
          // Add the SimpleTache object to the list
-         tacheList.add(simpleTache);
+        // tacheList.add(simpleTache);
     }
-     
 
 //-----------------------------------| supprimerTache |------------------------------------//     
      /**
@@ -98,7 +74,7 @@ import java.util.Scanner;
       * @param tacheList
       * @param nomTache
       */
-     static void supprimerTache(String fichier,List<SimpleTache> tacheList, String nomTache) {
+     public Boolean supprimerTache(String fichier,List<SimpleTache> tacheList, String nomTache) {
     	    Tache tacheToDelete = null;
     	    for (Tache tache : tacheList) {
     	        if (tache.nom.equalsIgnoreCase(nomTache)) {
@@ -108,77 +84,90 @@ import java.util.Scanner;
     	    }
     	    if (tacheToDelete != null) {
     	        tacheList.remove(tacheToDelete);
-    	        Utilisateur.sauvegarderObjetFichier(fichier, tacheList);
+    	        sauvegarderObjetFichier(fichier, tacheList);
     	        System.out.println("La tâche a été supprimée avec succès.");
+                return true;
     	    } else {
     	        System.out.println("La tâche spécifiée n'a pas été trouvée.");
+                return false;
     	    }
     	}
-//-----------------------------------| modifierTache |------------------------------------//     
-     
+//--------------------------------------Rechercher une tache--------------------------------------
+
      /**
-      * permet de modufier une tache par son nom a partir de la lists des taches
-      * @param fichier
-      * @param tacheList
-      * @param nomTache
+      *  chercher une tache dans la liste des taches par son nom
+      * @param tacheList la liste des taches
+      * @param nomTache le nom de la tache a chercher
+      * @return
+      *
       */
-     static void modifierTache(String fichier,List<SimpleTache> tacheList, String nomTache) {
-    	 Scanner scanner = new Scanner(System.in);
+     public SimpleTache rechercherTache(List<SimpleTache> tacheList ,String nomTache ){
+       SimpleTache tache = new SimpleTache();
+       int i = 0;
+         // on cherche la tache par son nom
+       while(i < tacheList.size()){
+
+        if (tacheList.get(i).nom.equals(nomTache)){
+            tache = tacheList.get(i);
+            i = tacheList.size() ;
+        }
+        i++ ;
+       }
+
+
+         return tache;
+     }
+
+        //-----------------------------------| modifierTache |------------------------------------//
+
+    /**
+     * permet de modifier une tache dans la lists des taches
+     *
+     * @param fichier le nom du fichier de l'utilisateur pour ecrire dedans
+     * @param tacheList la liste des taches
+     * @param ID  l identifiant de la tache a modifier (son nom )
+     * @param nomTache le nouveau nom de la tache
+     * @param duree la nouvelle duree
+     * @param ddl
+     * @param etat
+     * @param priorite
+     * @param categorie
+     * @param type
+     */
+
+     public Boolean modifieTache(String fichier,List<SimpleTache> tacheList, String ID , String nomTache , Duration duree , LocalDate ddl,Etat etat , Priorite priorite , Categorie categorie ,String type) {
+
+            // mettre a jour la tache
 
         Tache tacheToModify = null;
         for (Tache tache : tacheList) {
-            if (tache.nom.equalsIgnoreCase(nomTache)) {
+            if (tache.nom.equalsIgnoreCase(ID)) {
                 tacheToModify = tache;
                 break;
             }
         }
         if (tacheToModify != null) {
-            // Prompt the user for updated task information
-            System.out.print("Nouveau nom de la tâche : ");
-            String nouveauNom = scanner.nextLine();
-            System.out.print("Nouvelle durée de la tâche en minutes : ");
-            long nouvelleDureeMinutes = scanner.nextLong();
-            scanner.nextLine(); // Consume the newline character
-            System.out.print("Nouvelle date (yyyy-MM-dd): ");
-            String userInput = scanner.nextLine();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            Priorite nouvellePriorite = Priorite.HEIGHT;
+
 
             // Update the task
-            tacheToModify.nom = nouveauNom;
-            tacheToModify.duree = Duration.ofMinutes(nouvelleDureeMinutes);
-            tacheToModify.deadline =LocalDate.parse(userInput, formatter);
-            tacheToModify.priorite = nouvellePriorite;
-            
+            tacheToModify.nom = nomTache;
+            tacheToModify.duree = duree;
+            tacheToModify.deadline = ddl;
+            tacheToModify.priorite = priorite;
+            tacheToModify.etat = etat;
+            tacheToModify.categorie = categorie;
+            tacheToModify.type = type ;
+
 
             Utilisateur.sauvegarderObjetFichier(fichier, tacheList);
             System.out.println("La tâche a été modifiée avec succès.");
+            return true;
+
         } else {
+
             System.out.println("La tâche spécifiée n'a pas été trouvée.");
+            return false;
         }
     }
-
-     public static void permuterTachesMemeDeadline(List<SimpleTache> tacheList) {
-         Random random = new Random();
-         int i = 0;
-         
-         while (i < tacheList.size() - 1) {
-             SimpleTache currentTache = tacheList.get(i);
-             int j = i + 1;
-             
-             while (j < tacheList.size() && currentTache.deadline.isEqual(tacheList.get(j).deadline)) {
-                 // Permuter la tâche courante avec une tâche aléatoire ayant la même deadline
-                 int randomIndex = random.nextInt(j - i) + i;
-                 SimpleTache randomTache = tacheList.get(randomIndex);
-                 tacheList.set(randomIndex, currentTache);
-                 tacheList.set(i, randomTache);
-                 
-                 j++;
-             }
-             
-             i = j;
-         }
-     }
-    //evaluer
 	
 }// fin de class
