@@ -1,5 +1,4 @@
-package my_desktop_planner;
-
+package app.zaidiboussebata.Noyau;
 import java.io.Serializable; 
 import java.time.Duration;
 import java.time.LocalDate;
