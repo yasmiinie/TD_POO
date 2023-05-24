@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import static app.zaidiboussebata.Control.LogInController.navigateTo;
 import static app.zaidiboussebata.Control.LogInController.*;
@@ -93,6 +94,28 @@ public class TacheController {
     public void editClick(ActionEvent event){
         navigateTo( createBut , "/app/zaidiboussebata/editTask.fxml", "Edit a Task" , false);
     }
+    public void TodayTasks(ActionEvent event){
+        liste.getItems().clear();
 
+        List<Planning> dateList = Journee.tacheOfDay(LocalDate.now(), pseudo+"_historiquePlanning");
+        //affichage de la list
+        if(dateList.size() ==0 ) {   liste.getItems().add("You dont have any taks")     ;return;}
+        for(Planning plan : dateList) {
+
+            liste.getItems().add("Task "+ " : " +plan.tache.nom);
+            liste.getItems().add("            -Type : "+plan.tache.type);
+            liste.getItems().add("            -Priority : "+plan.tache.priorite.toString());
+            liste.getItems().add("            -Duration : "+plan.tache.duree);
+            liste.getItems().add("            -State : "+plan.tache.etat);
+            liste.getItems().add("            -Category : "+plan.tache.categorie);
+            liste.getItems().add("            -DeadLine : "+plan.tache.deadline);
+            liste.getItems().add("            -From : "+plan.creneau.getDebut());
+            liste.getItems().add("            -To : "+plan.creneau.getFin());
+            liste.getItems().add("            -Date : "+plan.creneau.getDate());
+            liste.getItems().add("                                 ");
+        }
+        Etat etat = Journee.getEtatGlobal(dateList);
+        System.out.println("\n\nVotre etat de cette journee  est "+etat);
+    }
 
 }

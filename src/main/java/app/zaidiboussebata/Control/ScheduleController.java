@@ -1,10 +1,16 @@
 package app.zaidiboussebata.Control;
 
+import app.zaidiboussebata.Noyau.HistoriquePlanning;
+import app.zaidiboussebata.Noyau.Planning;
+import app.zaidiboussebata.Noyau.SimpleTache;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 
-import static app.zaidiboussebata.Control.LogInController.navigateTo;
+import java.util.List;
+
+import static app.zaidiboussebata.Control.LogInController.*;
 
 public class ScheduleController {
     //--------------------------------------------------------------------------------
@@ -20,6 +26,18 @@ public class ScheduleController {
     @FXML
     public Button  scheduleButton;
 
+    //--------------------------------------------------------------------------------
+    @FXML
+    public ListView<String> liste  ;
+    //--------------------------------------------------------------------------------
+    @FXML
+    public Button manBut ;
+    @FXML
+    public Button autoBut ;
+    @FXML
+    public Button supBut ;
+    @FXML
+    public Button editBut ;
 
     //--------------------------------------------------------------------------------
 
@@ -47,4 +65,96 @@ public class ScheduleController {
         navigateTo(profileButton,"/app/zaidiboussebata/SchedulePage.fxml","Schedule Page" , true) ;
 
     }
+//---------------------------------------------------------------------------------------------------------------------
+    public void manClick(ActionEvent event){
+        navigateTo( manBut , "/app/zaidiboussebata/manSchedule.fxml", "Schedule" , false);
+
+    }
+    public void autoClick(ActionEvent event){
+
+        navigateTo( autoBut , "/app/zaidiboussebata/autoSchedule.fxml", "Schedule" , false);
+
+    }
+    public void editClick(ActionEvent event){
+        navigateTo( editBut , "/app/zaidiboussebata/addTask.fxml", "Edit your Schedule" , false);
+
+    }
+    public void removeClick(ActionEvent event){
+        navigateTo( supBut , "/app/zaidiboussebata/addTask.fxml", "Remove from your Schedule" , false);
+
+    }
+
+    /**
+     * Affiche la liste des encients planning
+     *
+     *
+     */
+    public void initialize() {
+
+        liste.getItems().clear();
+        // je recupere la liste des plannings
+            List<HistoriquePlanning> historyList = recupererObjetFichier(pseudo+"_historiquePlanning.ser");
+           if (historyList.size() >0){
+               HistoriquePlanning history = historyList.get(historyList.size() - 1);
+               liste.getItems().add("Planning : " );
+               for (int j = 0; j < history.listPlanning.size() ; j++) {
+
+                   Planning planning = history.listPlanning.get(j);
+                   liste.getItems().add("            _Task 0" + (j + 1) + " : " + planning.tache.nom);
+                   if(planning.bloquee == true){
+                       liste.getItems().add("                   (The Slot is blocked for this task) " );
+                   }
+                   liste.getItems().add("                     Date : "+ planning.creneau.getDate());
+                   liste.getItems().add("                     From : " +planning.creneau.getDebut());
+                   liste.getItems().add("                     To :   " +planning.creneau.getFin());
+                   liste.getItems().add("                     Type : " + planning.tache.type);
+                   liste.getItems().add("                     Priority : " +  planning.tache.priorite);
+                   liste.getItems().add("                     Duration : " +  planning.tache.duree);
+                   liste.getItems().add("                     State : " +  planning.tache.etat);
+                   liste.getItems().add("                     Category : " +  planning.tache.categorie);
+                   liste.getItems().add("                     DeadLine : " +  planning.tache.deadline);
+                   liste.getItems().add("                                 ");
+
+               }
+           }
+
+
+    }
+
+    /**
+     * l'historique de tous les plannings precedent
+     *
+     * @param event
+     */
+   public void historyPlanning(ActionEvent event){
+
+       liste.getItems().clear();
+       // je recupere la liste des plannings
+       List<HistoriquePlanning> historyList = recupererObjetFichier(pseudo+"_historiquePlanning.ser");
+
+
+       for (int i = 0; i < historyList.size(); i++) {
+           HistoriquePlanning history = historyList.get(i);
+           liste.getItems().add("Planning 0" + (i + 1) + " : " );
+
+           for (int j = 0; j < history.listPlanning.size() ; j++) {
+
+               Planning planning = history.listPlanning.get(j);
+               liste.getItems().add("            _Task 0" + (j + 1) + " : " + planning.tache.nom);
+               liste.getItems().add("                     Date : "+ planning.creneau.getDate());
+               liste.getItems().add("                     From : " +planning.creneau.getDebut());
+               liste.getItems().add("                     To :   " +planning.creneau.getFin());
+               liste.getItems().add("                     Type : " + planning.tache.type);
+               liste.getItems().add("                     Priority : " +  planning.tache.priorite);
+               liste.getItems().add("                     Duration : " +  planning.tache.duree);
+               liste.getItems().add("                     State : " +  planning.tache.etat);
+               liste.getItems().add("                     Category : " +  planning.tache.categorie);
+               liste.getItems().add("                     DeadLine : " +  planning.tache.deadline);
+               liste.getItems().add("                                 ");
+
+           }
+           liste.getItems().add("                                 ");
+       }
+
+   }
 }

@@ -108,6 +108,26 @@
                   <Font name="Verdana Bold" size="18.0" />
                </font>
             </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" ">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtre by :">
+               <font>
+                  <Font name="Verdana Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" ">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Text>
+            <Button mnemonicParsing="false" onAction="#TodayTasks" prefHeight="37.0" prefWidth="195.0" style="-fx-background-color: #17207f; -fx-border-color: #D8DCF7; -fx-background-radius: 8; -fx-border-radius: 7;" text="Today" textFill="#d8dcf7">
+               <font>
+                  <Font name="Verdana Bold" size="16.0" />
+               </font>
+            </Button>
          </children>
          <padding>
             <Insets bottom="90.0" left="20.0" right="20.0" top="130.0" />

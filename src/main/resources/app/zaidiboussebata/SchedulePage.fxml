@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -58,6 +59,90 @@
          </children>
          <padding>
             <Insets bottom="20.0" left="4.0" right="4.0" top="20.0" />
+         </padding>
+      </VBox>
+      <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="511.0">
+         <children>
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Schedule">
+               <font>
+                  <Font name="Verdana Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="Verdana Bold" size="24.0" />
+               </font>
+            </Text>
+            <ListView fx:id="liste" prefHeight="482.0" prefWidth="336.0" style="-fx-background-color: #17207f;" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Button mnemonicParsing="false" onAction="#initialize" prefHeight="26.0" prefWidth="251.0" style="-fx-background-color: #D8DCF7; -fx-border-color: black; -fx-border-radius: 7;" text="Refresh">
+               <font>
+                  <Font name="Verdana Bold" size="16.0" />
+               </font>
+            </Button>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+         </children>
+         <padding>
+            <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
+         </padding>
+      </VBox>
+      <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="Verdana Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+      <VBox prefHeight="700.0" prefWidth="215.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
+            <Button fx:id="manBut" mnemonicParsing="false" onAction="#manClick" prefHeight="37.0" prefWidth="321.0" style="-fx-background-color: #F69CA7; -fx-background-radius: 7;" text="Manually" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Bold" size="16.0" />
+               </font>
+            </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
+            <Button fx:id="autoBut" mnemonicParsing="false" onAction="#autoClick" prefHeight="37.0" prefWidth="321.0" style="-fx-background-color: #F69CA7; -fx-background-radius: 7;" text="Automatic" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Bold" size="16.0" />
+               </font>
+            </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
+            <Button fx:id="editBut" mnemonicParsing="false" onAction="#editClick" prefHeight="37.0" prefWidth="321.0" style="-fx-background-color: #F69CA7; -fx-background-radius: 7;" text="Edit" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Bold" size="16.0" />
+               </font>
+            </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
+            <Button fx:id="supBut" mnemonicParsing="false" onAction="#removeClick" prefHeight="37.0" prefWidth="321.0" style="-fx-background-color: #069CAB; -fx-background-radius: 7;" text="Remove a task" textFill="WHITE">
+               <font>
+                  <Font name="Verdana Bold" size="16.0" />
+               </font>
+            </Button>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" ">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtre by :">
+               <font>
+                  <Font name="Verdana Bold" size="18.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" ">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Text>
+            <Button mnemonicParsing="false" onAction="#historyPlanning" prefHeight="37.0" prefWidth="195.0" style="-fx-background-color: #17207f; -fx-border-color: #D8DCF7; -fx-background-radius: 8; -fx-border-radius: 7;" text="History" textFill="#d8dcf7">
+               <font>
+                  <Font name="Verdana Bold" size="16.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="90.0" left="20.0" right="20.0" top="130.0" />
          </padding>
       </VBox>
    </children>

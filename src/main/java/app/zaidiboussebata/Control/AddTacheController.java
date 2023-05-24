@@ -14,7 +14,6 @@ import static app.zaidiboussebata.Control.LogInController.*;
 
 
 public class AddTacheController {
-
     String type = "SIMPLE"; //par defaut cest une tache simple
     Categorie categorie = Categorie.OTHER ; //par defaut cest une other
     Priorite priorite = Priorite.HIGH ; //par defaut cest une High

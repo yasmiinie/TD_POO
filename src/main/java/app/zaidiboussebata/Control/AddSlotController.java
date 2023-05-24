@@ -27,7 +27,6 @@ public class AddSlotController {
     public TextField endSlot ;
     @FXML
     public DatePicker dateSlot;
-
     @FXML
     public Button addBut;
 
@@ -84,7 +83,7 @@ public class AddSlotController {
        else{
            SlotClick();
        }
-
-
     }
+
+
 }
