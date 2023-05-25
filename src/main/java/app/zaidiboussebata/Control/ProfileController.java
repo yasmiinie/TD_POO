@@ -5,7 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +16,7 @@ import java.util.Map;
 
 import static app.zaidiboussebata.Control.LogInController.navigateTo;
 import static app.zaidiboussebata.Control.LogInController.pseudo;
+import static app.zaidiboussebata.Noyau.Felicitation.nbr_min_tache;
 
 public class ProfileController {
     //--------------------------------------------------------------------------------
@@ -41,6 +44,32 @@ public class ProfileController {
     public Label goodLabel ;
     @FXML
     public Label excelLabel ;
+    @FXML
+    public Label nbTasksLabel;
+    @FXML
+    public Label  progressLabel;
+
+    @FXML
+    public Label dailyLabel ;
+
+    @FXML
+    public TextField nbTasksField;
+    @FXML
+    public Label overLabel;
+    @FXML
+    public Label profLabel ;
+    @FXML
+    public Label sportLabel;
+    @FXML
+    public Label workLabel;
+    @FXML
+    public Label hobbyLabel;
+    @FXML
+    public Label  healthLabel;
+    @FXML
+    public Label studyLabel ;
+
+
 
 
     //--------------------------------------------------------------------------------
@@ -70,6 +99,9 @@ public class ProfileController {
     }
 
     public void initialize(){
+
+        Journee journee = new Journee();
+        CompletedTacheDay completedTacheDay = new CompletedTacheDay();
         pseudoLabel.setText(pseudo);
         List<CompletedTacheDay> mapCompletedDay = new ArrayList<>();
 
@@ -78,32 +110,117 @@ public class ProfileController {
         CompletedTacheDay.calculateCompletedTasks(historiquePlanList, completedTasksByDay);
         CompletedTacheDay.printCompletedTacheDay(completedTasksByDay);
         Map<Badge, Integer> badgeCounts = new HashMap<>();
-        Felicitation.updateBadgeCounts(completedTasksByDay, badgeCounts, Felicitation.nbr_min_tache);
+        Felicitation.updateBadgeCounts(completedTasksByDay, badgeCounts, nbr_min_tache);
         congratsLabel.setText(String.valueOf(badgeCounts.getOrDefault(Badge.FELICITATION, 0)));
         goodLabel.setText(String.valueOf(badgeCounts.getOrDefault(Badge.GOOD, 0)));
         VgoodLabel.setText(String.valueOf(badgeCounts.getOrDefault(Badge.VERYGOOD, 0)));
         excelLabel.setText(String.valueOf(badgeCounts.getOrDefault(Badge.EXCELLENT,0)));
+        nbTasksLabel.setText(String.valueOf(nbr_min_tache));
+        // rendement journalier
+        dailyLabel.setText(String.valueOf(journee.rendementJournalier(LocalDate.now() , pseudo+"_historiquePlanning.ser")));
+
+        //la duree de temps passée sur des taches d'une categorie
+
+
+        Duration studiesDuration = null;
+        Duration hobbyDuration = null;
+        Duration workDuration = null;
+        Duration sportDuration = null;
+        Duration healthDuration = null;
+
+        for (Map.Entry<Categorie, Duration> entry :journee.CategoryDuration(pseudo+"_historiquePlanning.ser" ).entrySet()) {
+            Categorie category = entry.getKey();
+            Duration totalDuration = entry.getValue();
+
+            if (category == Categorie.STUDIES) {
+                studiesDuration = totalDuration;
+                // Perform operations specific to STUDIES category
+            } else if (category == Categorie.HOBBY) {
+                hobbyDuration = totalDuration;
+                // Perform operations specific to HOBBY category
+            } else if (category == Categorie.WORK) {
+                workDuration = totalDuration;
+                // Perform operations specific to WORK category
+            } else if (category == Categorie.SPORT) {
+                sportDuration = totalDuration;
+                // Perform operations specific to SPORT category
+            } else if (category == Categorie.HEALTH) {
+                healthDuration = totalDuration;
+                // Perform operations specific to HEALTH category
+            }
+            // Add more else-if conditions for other categories
+        }
+
+        if (studiesDuration != null) {
+            studyLabel.setText(String.valueOf(studiesDuration.toHours() + ":" + studiesDuration.toMinutesPart()));
+
+        } else {
+            studyLabel.setText("0");
+        }
+
+        if (hobbyDuration != null) {
+            hobbyLabel.setText(String.valueOf(hobbyDuration.toHours() + ":" + hobbyDuration.toMinutesPart()));
+
+        } else {
+            hobbyLabel.setText("0");
+
+        }
+
+        if (workDuration != null) {
+            workLabel.setText(String.valueOf(workDuration.toHours() + ":" + workDuration.toMinutesPart() ));
+        } else {
+            workLabel.setText(String.valueOf("0"));
+        }
+
+        if (sportDuration != null) {
+            sportLabel.setText(String.valueOf(sportDuration.toHours() + ":" + sportDuration.toMinutesPart()));
+        } else {
+            sportLabel.setText(String.valueOf("0"));
+        }
+
+        if (healthDuration != null) {
+            healthLabel.setText(String.valueOf(healthDuration.toHours() + ":" + healthDuration.toMinutesPart() ));
+
+        } else {
+            healthLabel.setText("0");
+        }
+
+
+
+       List<Planning> dateList = Journee.tacheOfDay(LocalDate.now(), pseudo+"_historiquePlanning.ser");
+        //affichage de la list
+        if(dateList.size() ==0 ) {System.out.print("Enter youriuyguyhjkbjgbiug pseudo: ");return;}
+
+        // nombre de fois
+        Etat etat = Journee.getEtatGlobal(dateList);
+        progressLabel.setText(String.valueOf( etat));
+        overLabel.setText(String.valueOf(  completedTacheDay.countDaysWithCompletedTasks(completedTasksByDay , nbr_min_tache)));
+
+        // le jour le plus rentable
+
+        if ( journee.bestDay( pseudo+"_historiquePlanning.ser",completedTasksByDay ) == null){
+            profLabel.setText(String.valueOf( "No Day" ));
+        }
+        else {
+            profLabel.setText(String.valueOf(journee.bestDay( pseudo+"_historiquePlanning.ser",completedTasksByDay) ));
+
+        }
+
+
+
 
     }
-public void fct(){
-    /*List<CompletedTacheDay> mapCompletedDay = new ArrayList<>();
-    List<HistoriquePlanning> historiquePlanList = Utilisateur.recupererObjetFichier(FICHIER_HISTORIQUE_PLANNING);
-    Map<LocalDate, Integer> completedTasksByDay = new HashMap<>();
-    CompletedTacheDay.calculateCompletedTasks(historiquePlanList, completedTasksByDay);
-    CompletedTacheDay.printCompletedTacheDay(completedTasksByDay);
-    Map<Badge, Integer> badgeCounts = new HashMap<>();
 
-    // Populate the completedTasksByDay map with data
+    @FXML
+    public  void navigateProject(ActionEvent event){
 
-    Felicitation.updateBadgeCounts(completedTasksByDay, badgeCounts, Felicitation.nbr_min_tache);
-
-    // Access the counts for each badge
-    int felicitationCount = badgeCounts.getOrDefault(Badge.FELICITATION, 0);
-    int goodCount = badgeCounts.getOrDefault(Badge.GOOD, 0);
-    int veryGoodCount = badgeCounts.getOrDefault(Badge.VERYGOOD, 0);
-    int excellentCount = badgeCounts.getOrDefault(Badge.EXCELLENT, 0);
-    System.out.println("\n+FELICITATION "+felicitationCount+" GOOD : "+goodCount);*/
-
-}
+        navigateTo(tasksButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
+        //    TacheController.initialize();
+    }
+    public void editnbTask(ActionEvent event){
+        System.out.println(Integer.parseInt(nbTasksField.getText()));
+        nbr_min_tache = Integer.parseInt(nbTasksField.getText());
+        nbTasksLabel.setText(String.valueOf(nbr_min_tache));
+    }
 
 }

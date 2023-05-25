@@ -59,6 +59,12 @@ public class TacheController {
     @FXML
     public  ListView<String> liste ;
 
+    @FXML
+    public  void navigateProject(ActionEvent event){
+
+        navigateTo(tasksButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
+        //    TacheController.initialize();
+    }
 
     /**
      * permet  l'initialisation de la liste a partir du fichier

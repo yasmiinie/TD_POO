@@ -39,6 +39,8 @@ public class ScheduleController {
     @FXML
     public Button editBut ;
 
+    @FXML
+    public Button periodicBut ;
     //--------------------------------------------------------------------------------
 
     @FXML
@@ -81,7 +83,15 @@ public class ScheduleController {
     }
     public void removeClick(ActionEvent event){
         navigateTo( supBut , "/app/zaidiboussebata/addTask.fxml", "Remove from your Schedule" , false);
+    }
+    public void periodicClick(ActionEvent event){
+        navigateTo( supBut , "/app/zaidiboussebata/periodic.fxml", "Remove from your Schedule" , false);
+    }
+    @FXML
+    public  void navigateProject(ActionEvent event){
 
+        navigateTo(tasksButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
+        //    TacheController.initialize();
     }
 
     /**
@@ -114,7 +124,6 @@ public class ScheduleController {
                    liste.getItems().add("                     Category : " +  planning.tache.categorie);
                    liste.getItems().add("                     DeadLine : " +  planning.tache.deadline);
                    liste.getItems().add("                                 ");
-
                }
            }
 
@@ -151,7 +160,6 @@ public class ScheduleController {
                liste.getItems().add("                     Category : " +  planning.tache.categorie);
                liste.getItems().add("                     DeadLine : " +  planning.tache.deadline);
                liste.getItems().add("                                 ");
-
            }
            liste.getItems().add("                                 ");
        }

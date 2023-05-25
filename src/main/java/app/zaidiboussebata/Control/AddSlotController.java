@@ -71,9 +71,6 @@ public class AddSlotController {
         Creneau_libre creneau = new  Creneau_libre();
 
         List<Creneau_libre> CreneauList = recupererObjetFichier(pseudo+"_creneau.ser");
-        System.out.println(toLocalTime(startSlot.getText()));
-        System.out.println(endSlot.getText());
-        System.out.println(toLocalTime(endSlot.getText()));
 
         if (creneau.createrCreneauLibre(pseudo+"_creneau.ser",toLocalTime(startSlot.getText()),toLocalTime(endSlot.getText()),dateSlot.getValue(),CreneauList)){
            // on ferme la fenetre

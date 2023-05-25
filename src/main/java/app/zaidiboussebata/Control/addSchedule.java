@@ -63,6 +63,21 @@ public class addSchedule {
     public MenuButton states ;
     @FXML
     public DatePicker deadLine ;
+
+    @FXML
+    public TextField To ;
+    @FXML
+    public TextField From ;
+    @FXML
+    public TextField every;
+    @FXML
+    public DatePicker Starting;
+
+    @FXML
+    public DatePicker Ending ;
+
+
+
     @FXML
     public Label TaskErreur ;// le message d'erreur dans le cas d'une tache non trouvee
     //--------------------------Les bouttns------------------------------------------------------------------------------------
@@ -490,9 +505,8 @@ public class addSchedule {
         sauvegarderObjetFichier(pseudo+"_taches.ser", tacheList);
         sauvegarderObjetFichier(pseudo+"_creneau.ser",creneauList );
         HistoriquePlanning history = new HistoriquePlanning();
-        history.listPlanning.add(planning);
         List<HistoriquePlanning> historiquePlanList= recupererObjetFichier(pseudo+"_historiquePlanning.ser");
-        historiquePlanList.add(history);
+       // historiquePlanList.add(history);
 
         history.ajouterHistoriquePlanning(historiquePlanList ,planningList );
         sauvegarderObjetFichier(pseudo+"_historiquePlanning.ser",historiquePlanList);
@@ -527,9 +541,9 @@ public class addSchedule {
             sauvegarderObjetFichier(pseudo+"_taches.ser", tacheList);
             sauvegarderObjetFichier(pseudo+"_creneau.ser",creneauList );
             HistoriquePlanning history = new HistoriquePlanning();
-            history.listPlanning.add(planning);
+
             List<HistoriquePlanning> historiquePlanList= recupererObjetFichier(pseudo+"_historiquePlanning.ser");
-            historiquePlanList.add(history);
+          //  historiquePlanList.add(history);
 
             history.ajouterHistoriquePlanning(historiquePlanList ,planningList );
             sauvegarderObjetFichier(pseudo+"_historiquePlanning.ser",historiquePlanList);
@@ -568,9 +582,9 @@ public class addSchedule {
             sauvegarderObjetFichier(pseudo+"_taches.ser", tacheList);
             sauvegarderObjetFichier(pseudo+"_creneau.ser",creneauList );
             HistoriquePlanning history = new HistoriquePlanning();
-            history.listPlanning.add(planning);
+
             List<HistoriquePlanning> historiquePlanList= recupererObjetFichier(pseudo+"_historiquePlanning.ser");
-            historiquePlanList.add(history);
+        //  historiquePlanList.add(history);
 
             history.ajouterHistoriquePlanning(historiquePlanList ,planningList );
             sauvegarderObjetFichier(pseudo+"_historiquePlanning.ser",historiquePlanList);
@@ -583,6 +597,48 @@ public class addSchedule {
             navigateTo(addPeriod,"/app/zaidiboussebata/etaleePage.fxml","Schedule" , true) ;
         }
 
+    }
+
+    /**
+     * ajouter une tache periodique (tous les n jours )
+     * @param event
+     */
+   public void PeriodicTask(ActionEvent event){
+       // on lit la liste des taches
+       List<SimpleTache> tacheList = recupererObjetFichier(pseudo+"_taches.ser");
+       Planning planning = new Planning();
+       SimpleTache simple = new SimpleTache();
+       simple.nom = tacheName.getText() ;
+       simple.type = type;
+       simple.etat = Etat.UNSCHEDULED ;
+       simple.deadline = deadLine.getValue();
+       simple.categorie = categorie ;
+       simple.priorite = priorite ;
+
+       try {
+           // la durre
+           Duration duration = parseDuration(tacheDuree.getText());
+           simple.duree = duration;
+           // Use the duration as needed
+       } catch (IllegalArgumentException e) {
+           // Handle invalid duration input
+       }
+    Creneau_libre creneauLibre = new Creneau_libre();
+       creneauLibre.setDebut(toLocalTime(From.getText()));
+       creneauLibre.setFin(toLocalTime(To.getText()));
+       creneauLibre.setDate(Starting.getValue());
+
+       tacheList.add(simple) ;
+       sauvegarderObjetFichier(pseudo+"_taches.ser", tacheList); // on sauvegarde dans le fichier
+       planning.plannifier_n_jours(Starting.getValue() , Ending.getValue(), Integer.parseInt(every.getText()) , simple,creneauLibre , pseudo+"_historiquePlanning.ser");
+
+
+
+
+
+       // on ferme la fenetre
+       Stage currentStage = (Stage) addBut.getScene().getWindow();
+       currentStage.close();
     }
 
 }

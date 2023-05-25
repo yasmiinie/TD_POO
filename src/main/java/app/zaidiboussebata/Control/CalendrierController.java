@@ -195,16 +195,9 @@ public class CalendrierController implements Initializable {
         int year = dateFocus.getYear();
         int month = dateFocus.getMonth().getValue();
         // la liste des taches a afficher dans le planning
-        ZonedDateTime time = ZonedDateTime.of(2023, 05,19 , 16,0,0,0,dateFocus.getZone());
-        calendarActivities.add(new CalendarActivity(time , "Client" , 12345));
-        ZonedDateTime time1 = ZonedDateTime.of(2023, 05,19 , 19,0,0,0,dateFocus.getZone());
-        calendarActivities.add(new CalendarActivity(time1 , "Yasmine" , 12345));
-        ZonedDateTime time2 = ZonedDateTime.of(2023, 05,19 , 19,0,0,0,dateFocus.getZone());
-        calendarActivities.add(new CalendarActivity(time2 , "Yasmine" , 12345));
-        ZonedDateTime time3 = ZonedDateTime.of(2023, 05,19 , 19,0,0,0,dateFocus.getZone());
-        calendarActivities.add(new CalendarActivity(time3 , "Yasmine" , 12345));
-        ZonedDateTime time4 = ZonedDateTime.of(2023, 05,19 , 19,0,0,0,dateFocus.getZone());
-        calendarActivities.add(new CalendarActivity(time4 , "Yasmine" , 12345));
+
+       //  ZonedDateTime time4 = ZonedDateTime.of(2023, 05,19 , 19,0,0,0,dateFocus.getZone());
+       // calendarActivities.add(new CalendarActivity(time4 , "Yasmine" , 12345));
 
         /*   Random random = new Random();
         for (int i = 0; i < 50; i++) {
@@ -220,6 +213,12 @@ public class CalendrierController implements Initializable {
 
    navigateTo(tasksButton,"/app/zaidiboussebata/TachePage.fxml","Tasks Page" , true) ;
     //    TacheController.initialize();
+    }
+    @FXML
+    public  void navigateProject(ActionEvent event){
+
+        navigateTo(tasksButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
+        //    TacheController.initialize();
     }
 
     @FXML

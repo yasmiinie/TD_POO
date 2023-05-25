@@ -78,6 +78,13 @@ public class FreeSlotController {
     @FXML
     public ListView<String> liste ;
 
+
+    @FXML
+    public  void navigateProject(ActionEvent event){
+
+        navigateTo(tasksButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
+        //    TacheController.initialize();
+    }
     //-------------------------------------------------------------------------
     public  void initialize() {
 

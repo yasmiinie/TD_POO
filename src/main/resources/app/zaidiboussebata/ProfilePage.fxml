@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -66,16 +67,16 @@
       </VBox>
       <VBox prefHeight="700.0" prefWidth="738.0">
          <children>
-            <HBox alignment="TOP_RIGHT" prefHeight="53.0" prefWidth="658.0">
+            <HBox alignment="TOP_RIGHT" prefHeight="32.0" prefWidth="658.0">
                <children>
                   <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello ">
                      <font>
-                        <Font name="Verdana Bold" size="24.0" />
+                        <Font name="Verdana Bold" size="26.0" />
                      </font>
                   </Text>
                   <Label fx:id="pseudoLabel" prefHeight="30.0" prefWidth="338.0" textFill="#17207f">
                      <font>
-                        <Font name="Verdana Bold" size="24.0" />
+                        <Font name="Verdana Bold" size="26.0" />
                      </font>
                   </Label>
                </children>
@@ -87,7 +88,7 @@
             </Text>
             <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
-                  <Font name="Verdana Bold" size="18.0" />
+                  <Font name="Verdana Bold" size="5.0" />
                </font>
             </Text>
             <GridPane>
@@ -146,7 +147,7 @@
             </GridPane>
             <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
-                  <Font name="Verdana Bold" size="36.0" />
+                  <Font name="Verdana Bold" size="18.0" />
                </font>
             </Text>
             <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Statistics :">
@@ -161,52 +162,182 @@
             </Text>
             <GridPane>
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.0997314453125" minWidth="10.0" prefWidth="187.39324951171875" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="539.93505859375" minWidth="10.0" prefWidth="470.60675048828125" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="337.98504638671875" minWidth="10.0" prefWidth="263.00238037109375" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="539.93505859375" minWidth="10.0" prefWidth="394.99761962890625" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="36.862518310546875" minHeight="10.0" prefHeight="36.862518310546875" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="39.803619384765625" minHeight="10.0" prefHeight="29.460723876953125" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="40.78399658203125" minHeight="10.0" prefHeight="35.92144775390625" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="46.666168212890625" minHeight="10.0" prefHeight="36.57855224609375" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="64.31973266601562" minHeight="10.0" prefHeight="61.641632080078125" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="42.358367919921875" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="25.9041748046875" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Congratulations :">
+                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Days with task overachievement :" GridPane.rowIndex="2">
                      <font>
                         <Font name="Verdana" size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Excellent :" GridPane.rowIndex="3">
+                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Daily performance :">
                      <font>
                         <Font name="Verdana" size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Good :" GridPane.rowIndex="1">
+                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="The progress of a day :" GridPane.rowIndex="1">
                      <font>
                         <Font name="Verdana" size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Very Good :" GridPane.rowIndex="2">
+                  <Label fx:id="progressLabel" prefHeight="30.0" prefWidth="290.0" textFill="#17207f" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
-                        <Font name="Verdana" size="14.0" />
-                     </font>
-                  </Text>
-                  <Label fx:id="congratsLabel1" prefHeight="17.0" prefWidth="0.0" textFill="#17207f" GridPane.columnIndex="1">
-                     <font>
-                        <Font name="Verdana" size="24.0" />
+                        <Font name="Verdana" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="VgoodLabel1" prefHeight="17.0" prefWidth="0.0" textFill="#17207f" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Label fx:id="overLabel" prefHeight="30.0" prefWidth="375.0" textFill="#17207f" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
-                        <Font name="Verdana" size="24.0" />
+                        <Font name="Verdana" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="excelLabel1" prefHeight="30.0" prefWidth="0.0" textFill="#17207f" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <Label fx:id="dailyLabel" prefHeight="30.0" prefWidth="354.0" textFill="#17207f" GridPane.columnIndex="1">
                      <font>
-                        <Font name="Verdana" size="24.0" />
+                        <Font name="Verdana" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="goodLabel1" prefHeight="17.0" prefWidth="0.0" textFill="#17207f" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Verdana" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Most profitable day :" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Verdana" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Verdana" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Moyenne :" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Verdana" size="14.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="profLabel" prefHeight="30.0" prefWidth="290.0" textFill="#17207f" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Verdana" size="18.0" />
+                     </font>
+                  </Label>
+                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="The duration of time spent on tasks :" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Verdana" size="14.0" />
+                     </font>
+                  </Text>
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Study ">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Work" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Hobby" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="hobbyLabel" prefHeight="30.0" prefWidth="375.0" textFill="#17207f" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Verdana" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="workLabel" prefHeight="30.0" prefWidth="375.0" textFill="#17207f" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Verdana" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="studyLabel" prefHeight="30.0" prefWidth="375.0" textFill="#17207f" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Verdana" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Verdana" size="14.0" />
+                     </font>
+                  </Text>
+                  <GridPane GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="31.40240478515625" minHeight="0.0" prefHeight="28.603607177734375" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="25.396392822265625" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="10.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Health" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Sport">
+                           <font>
+                              <Font name="Verdana" size="11.0" />
+                           </font>
+                        </Text>
+                        <Label fx:id="healthLabel" prefHeight="30.0" prefWidth="375.0" textFill="#17207f" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Verdana" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="sportLabel" prefHeight="30.0" prefWidth="375.0" textFill="#17207f" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Verdana" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="323.7657470703125" minWidth="10.0" prefWidth="304.13726806640625" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="353.86273193359375" minWidth="10.0" prefWidth="353.86273193359375" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="editnbTasks" mnemonicParsing="false" onAction="#editnbTask" prefHeight="26.0" prefWidth="336.0" text="Edit" GridPane.rowIndex="2" />
+                  <Text fill="#17207f" strokeType="OUTSIDE" strokeWidth="0.0" text="Numbre of tasks to be completed in a day :">
+                     <font>
+                        <Font name="Verdana" size="14.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="nbTasksField" GridPane.rowIndex="1" />
+                  <Label fx:id="nbTasksLabel" prefHeight="17.0" prefWidth="0.0" textFill="#17207f" GridPane.columnIndex="1">
                      <font>
                         <Font name="Verdana" size="24.0" />
                      </font>
@@ -215,7 +346,7 @@
             </GridPane>
          </children>
          <padding>
-            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+            <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
          </padding>
       </VBox>
    </children>

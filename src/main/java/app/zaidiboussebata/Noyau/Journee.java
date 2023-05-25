@@ -77,7 +77,7 @@ public class Journee {
         return count;
     }
 
-    public static Float rendementJournalier(LocalDate date,String FICHIER_HISTORIQUE_PLANNING) {
+    public  Float rendementJournalier(LocalDate date,String FICHIER_HISTORIQUE_PLANNING) {
 
         List<Planning> dateList = Journee.tacheOfDay(date, FICHIER_HISTORIQUE_PLANNING);
 
@@ -89,7 +89,7 @@ public class Journee {
     }
 
 
-    public static LocalDate bestDay(String fileName, Map<LocalDate, Integer> completedTasksByDay) {
+    public  LocalDate bestDay(String fileName, Map<LocalDate, Integer> completedTasksByDay) {
         List<HistoriquePlanning> historiquePlanList = Utilisateur.recupererObjetFichier(fileName);
         CompletedTacheDay.calculateCompletedTasks(historiquePlanList, completedTasksByDay);
 
@@ -109,7 +109,7 @@ public class Journee {
     }
 
 
-    public static Map<Categorie, Duration> CategoryDuration(String FICHIER_HISTORIQUE_PLANNING) {
+    public  Map<Categorie, Duration> CategoryDuration(String FICHIER_HISTORIQUE_PLANNING) {
         List<HistoriquePlanning> historiquePlanList = Utilisateur.recupererObjetFichier(FICHIER_HISTORIQUE_PLANNING);
 
         Map<Categorie, Duration> categoryDurationMap = new HashMap<>();

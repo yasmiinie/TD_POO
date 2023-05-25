@@ -27,7 +27,7 @@ public class CompletedTacheDay {
 
         for (HistoriquePlanning historiquePlanning : historiquePlanList) {
             for (Planning planning : historiquePlanning.listPlanning) {
-                if (planning.tache.etat == Etat.IN_PROGRESS) {
+                if (planning.tache.etat == Etat.COMPLETED) {
                     LocalDate date = planning.creneau.getDate();
                     completedTasksByDay.put(date, completedTasksByDay.getOrDefault(date, 0) + 1);
                     hasCompletedTasks = true;
@@ -38,7 +38,7 @@ public class CompletedTacheDay {
         return hasCompletedTasks;
     }
 
-    public static int countDaysWithCompletedTasks(Map<LocalDate, Integer> completedTasksByDay, int threshold) {
+    public  int countDaysWithCompletedTasks(Map<LocalDate, Integer> completedTasksByDay, int threshold) {
         int count = 0;
 
         for (Map.Entry<LocalDate, Integer> entry : completedTasksByDay.entrySet()) {
