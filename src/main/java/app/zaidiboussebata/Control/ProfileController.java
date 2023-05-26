@@ -16,6 +16,7 @@ import java.util.Map;
 
 import static app.zaidiboussebata.Control.LogInController.navigateTo;
 import static app.zaidiboussebata.Control.LogInController.pseudo;
+import static app.zaidiboussebata.Noyau.Creneau_libre.dureeMin;
 import static app.zaidiboussebata.Noyau.Felicitation.nbr_min_tache;
 
 public class ProfileController {
@@ -47,6 +48,8 @@ public class ProfileController {
     @FXML
     public Label nbTasksLabel;
     @FXML
+    public Label nbTasksLabel1;
+    @FXML
     public Label  progressLabel;
 
     @FXML
@@ -54,6 +57,8 @@ public class ProfileController {
 
     @FXML
     public TextField nbTasksField;
+    @FXML
+    public TextField nbTasksField1;
     @FXML
     public Label overLabel;
     @FXML
@@ -73,7 +78,13 @@ public class ProfileController {
 
 
     //--------------------------------------------------------------------------------
+    @FXML
+    public Button ProjectButton ;
+    @FXML
+    public  void navigateProject(ActionEvent event){
 
+        navigateTo(ProjectButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
+    }
     @FXML
     public  void navigateTasks(ActionEvent event){
 
@@ -101,22 +112,31 @@ public class ProfileController {
     public void initialize(){
 
         Journee journee = new Journee();
+        Felicitation felicitation = new Felicitation();
         CompletedTacheDay completedTacheDay = new CompletedTacheDay();
         pseudoLabel.setText(pseudo);
         List<CompletedTacheDay> mapCompletedDay = new ArrayList<>();
 
         List<HistoriquePlanning> historiquePlanList = Utilisateur.recupererObjetFichier(pseudo+"_historiquePlanning.ser" );
         Map<LocalDate, Integer> completedTasksByDay = new HashMap<>();
-        CompletedTacheDay.calculateCompletedTasks(historiquePlanList, completedTasksByDay);
-        CompletedTacheDay.printCompletedTacheDay(completedTasksByDay);
+        completedTacheDay.calculateCompletedTasks(historiquePlanList, completedTasksByDay);
+        completedTacheDay.printCompletedTacheDay(completedTasksByDay);
         Map<Badge, Integer> badgeCounts = new HashMap<>();
-        Felicitation.updateBadgeCounts(completedTasksByDay, badgeCounts, nbr_min_tache);
+        felicitation.updateBadgeCounts(completedTasksByDay, badgeCounts, nbr_min_tache);
         congratsLabel.setText(String.valueOf(badgeCounts.getOrDefault(Badge.FELICITATION, 0)));
         goodLabel.setText(String.valueOf(badgeCounts.getOrDefault(Badge.GOOD, 0)));
         VgoodLabel.setText(String.valueOf(badgeCounts.getOrDefault(Badge.VERYGOOD, 0)));
         excelLabel.setText(String.valueOf(badgeCounts.getOrDefault(Badge.EXCELLENT,0)));
+      //changer le nb de taches
         nbTasksLabel.setText(String.valueOf(nbr_min_tache));
+
+
+
+
         // rendement journalier
+
+
+
         dailyLabel.setText(String.valueOf(journee.rendementJournalier(LocalDate.now() , pseudo+"_historiquePlanning.ser")));
 
         //la duree de temps passée sur des taches d'une categorie
@@ -187,14 +207,12 @@ public class ProfileController {
 
 
 
-       List<Planning> dateList = Journee.tacheOfDay(LocalDate.now(), pseudo+"_historiquePlanning.ser");
-        //affichage de la list
-        if(dateList.size() ==0 ) {System.out.print("Enter youriuyguyhjkbjgbiug pseudo: ");return;}
+       List<Planning> dateList = journee.tacheOfDay(LocalDate.now(), pseudo+"_historiquePlanning.ser");
 
         // nombre de fois
-        Etat etat = Journee.getEtatGlobal(dateList);
+        Etat etat = journee.getEtatGlobal(dateList);
         progressLabel.setText(String.valueOf( etat));
-        overLabel.setText(String.valueOf(  completedTacheDay.countDaysWithCompletedTasks(completedTasksByDay , nbr_min_tache)));
+        overLabel.setText(String.valueOf(  completedTacheDay.countDaysWithCompletedTasks(completedTasksByDay , nbr_min_tache + 1)));
 
         // le jour le plus rentable
 
@@ -205,22 +223,49 @@ public class ProfileController {
             profLabel.setText(String.valueOf(journee.bestDay( pseudo+"_historiquePlanning.ser",completedTasksByDay) ));
 
         }
+        //affichage de la list
+        if(dateList.size() ==0 ) {System.out.print("Enter your pseudo: ");}
+
 
 
 
 
     }
 
-    @FXML
-    public  void navigateProject(ActionEvent event){
+    /**
+     * Permet de convertir le text en typede DURATION
+     *
+     * @param durationText
+     * @return type Duration
+     */
+    private Duration parseDuration(String durationText) {
+        // Implement your custom parsing logic here
+        // Example: Parse duration in the format "HH:MM"
+        String[] parts = durationText.split(":");
+        int hours = Integer.parseInt(parts[0]);
+        int minutes = Integer.parseInt(parts[1]);
+        // int seconds = Integer.parseInt(parts[2]);
 
-        navigateTo(tasksButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
-        //    TacheController.initialize();
+        return Duration.ofHours(hours).plusMinutes(minutes);
     }
+
+
     public void editnbTask(ActionEvent event){
         System.out.println(Integer.parseInt(nbTasksField.getText()));
         nbr_min_tache = Integer.parseInt(nbTasksField.getText());
         nbTasksLabel.setText(String.valueOf(nbr_min_tache));
+    }
+
+    public void editnbSlot(ActionEvent event){
+        try {
+            Duration duration = parseDuration(nbTasksField1.getText());
+            dureeMin = duration ;
+            nbTasksLabel1.setText(String.valueOf(duration));
+
+            // Use the duration as needed
+        } catch (IllegalArgumentException e) {
+            // Handle invalid duration input
+        }
     }
 
 }

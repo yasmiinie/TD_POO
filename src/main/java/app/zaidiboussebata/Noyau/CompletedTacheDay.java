@@ -3,15 +3,18 @@ package app.zaidiboussebata.Noyau;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-//30 tu peux changer letat
 public class CompletedTacheDay {
 
     public static LocalDate date;
     public static int nbrTacheCompletee;
 
-
-    public static int getTasksAccomplishedForDay(LocalDate date, HistoriquePlanning historiquePlanning) {
-        // Code to retrieve the number of tasks accomplished for a specific day
+    /**
+     *  retourne le nombre de tache  completés dans une journee specifique
+     * @param date   la journee en question
+     * @param historiquePlanning
+     * @return
+     */
+    public  int getTasksAccomplishedForDay(LocalDate date, HistoriquePlanning historiquePlanning) {
         int count = 0;
         for (Planning plan : historiquePlanning.listPlanning) {
             if (plan.creneau.getDate().equals(date)) {
@@ -20,9 +23,15 @@ public class CompletedTacheDay {
         }
         return count;
     }
+//---------------------------------------------------------------------------------------------------
 
-
-    public static boolean calculateCompletedTasks(List<HistoriquePlanning> historiquePlanList, Map<LocalDate, Integer> completedTasksByDay) {
+    /**
+     * calcule le nombre de tache completes pour chaque journee
+     * @param historiquePlanList
+     * @param completedTasksByDay
+     * @return
+     */
+    public  boolean calculateCompletedTasks(List<HistoriquePlanning> historiquePlanList, Map<LocalDate, Integer> completedTasksByDay) {
         boolean hasCompletedTasks = false;
 
         for (HistoriquePlanning historiquePlanning : historiquePlanList) {
@@ -37,7 +46,14 @@ public class CompletedTacheDay {
 
         return hasCompletedTasks;
     }
+//---------------------------------------------------------------------------------------------------
 
+    /**
+     * retoure le nombre de jours avec des tache completés egaux a min-tache (le nombre minimale de tache a acomplire dans une journee )
+     * @param completedTasksByDay
+     * @param threshold
+     * @return
+     */
     public  int countDaysWithCompletedTasks(Map<LocalDate, Integer> completedTasksByDay, int threshold) {
         int count = 0;
 
@@ -52,9 +68,13 @@ public class CompletedTacheDay {
         return count;
     }
 
+//---------------------------------------------------------------------------------------------------
 
-
-    public static void printCompletedTacheDay(Map<LocalDate, Integer> completedTasksByDay) {
+    /**
+     *
+     * @param completedTasksByDay
+     */
+    public  void printCompletedTacheDay(Map<LocalDate, Integer> completedTasksByDay) {
         // TODO Auto-generated method stub
         for (Map.Entry<LocalDate, Integer> entry : completedTasksByDay.entrySet()) {
             LocalDate date = entry.getKey();

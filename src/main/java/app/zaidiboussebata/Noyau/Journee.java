@@ -13,7 +13,13 @@ public class Journee {
     public int nbrTachesRealisee;
     public Badge badge;
 
-    public static List<Planning> tacheOfDay(LocalDate d, String FICHIER_HISTORIQUE_PLANNING) {
+    /**
+     * retourne la liste des taches de la journee
+     * @param d
+     * @param FICHIER_HISTORIQUE_PLANNING
+     * @return
+     */
+    public  List<Planning> tacheOfDay(LocalDate d, String FICHIER_HISTORIQUE_PLANNING) {
         List<HistoriquePlanning> historiquePlanList= Utilisateur.recupererObjetFichier(FICHIER_HISTORIQUE_PLANNING);
         HistoriquePlanning history = new HistoriquePlanning() ;
         HistoriquePlanning historiquePlanning ;
@@ -34,7 +40,14 @@ public class Journee {
 
         return dateList;
     }
-    public static <T> Etat getEtatGlobal(List<T> itemList) {
+
+    /**
+     * Retourne l'etat globale (dans le cas d'une tache decomposable / projet)
+     * @param itemList
+     * @return
+     * @param <T>
+     */
+    public  <T> Etat getEtatGlobal(List<T> itemList) {
         Etat etatGlobal = null;
 
         for (T item : itemList) {
@@ -65,7 +78,13 @@ public class Journee {
         return etatGlobal;
     }
 
-    public static int TacheComplete(List<Planning> dateList,Etat etat) {
+    /**
+     * retourne le nombre de tache completes
+     * @param dateList
+     * @param etat
+     * @return
+     */
+    public  int TacheComplete(List<Planning> dateList,Etat etat) {
         int count = 0;
 
         for (Planning plan : dateList) {
@@ -77,21 +96,33 @@ public class Journee {
         return count;
     }
 
+    /**
+     * calcule le rendement journalier
+     * @param date
+     * @param FICHIER_HISTORIQUE_PLANNING
+     * @return
+     */
     public  Float rendementJournalier(LocalDate date,String FICHIER_HISTORIQUE_PLANNING) {
-
-        List<Planning> dateList = Journee.tacheOfDay(date, FICHIER_HISTORIQUE_PLANNING);
+        Journee journee = new Journee();
+        List<Planning> dateList = journee.tacheOfDay(date, FICHIER_HISTORIQUE_PLANNING);
 
         for(Planning plan: dateList){
             System.out.println("\n name : "+plan.tache.nom+" etat "+plan.tache.etat);
         }
         // jsp esq prevues 9esdo les taches li kaynin dans cette journee ou bien le nbr minimal des tache li hwa ydiro
-        return (float) Journee.TacheComplete(dateList,Etat.COMPLETED) / dateList.size();
+        return (float) journee.TacheComplete(dateList,Etat.COMPLETED) / dateList.size();
     }
 
-
+    /**
+     * le jour ou il a ete le plus rentable
+     * @param fileName
+     * @param completedTasksByDay
+     * @return
+     */
     public  LocalDate bestDay(String fileName, Map<LocalDate, Integer> completedTasksByDay) {
         List<HistoriquePlanning> historiquePlanList = Utilisateur.recupererObjetFichier(fileName);
-        CompletedTacheDay.calculateCompletedTasks(historiquePlanList, completedTasksByDay);
+        CompletedTacheDay completedTacheDay = new CompletedTacheDay();
+        completedTacheDay.calculateCompletedTasks(historiquePlanList, completedTasksByDay);
 
         LocalDate maxDay = null;
         int maxCount = 0;
@@ -108,8 +139,12 @@ public class Journee {
         return maxDay;
     }
 
-
-    public  Map<Categorie, Duration> CategoryDuration(String FICHIER_HISTORIQUE_PLANNING) {
+    /** retourne Map < Categorie , et la duree de chaque categorie >
+     *
+     * @param FICHIER_HISTORIQUE_PLANNING
+     * @return
+     */
+    public static Map<Categorie, Duration> CategoryDuration(String FICHIER_HISTORIQUE_PLANNING) {
         List<HistoriquePlanning> historiquePlanList = Utilisateur.recupererObjetFichier(FICHIER_HISTORIQUE_PLANNING);
 
         Map<Categorie, Duration> categoryDurationMap = new HashMap<>();

@@ -41,6 +41,11 @@
                   <Font name="Verdana" size="14.0" />
                </font>
             </Button>
+            <Button fx:id="ProjectButton" mnemonicParsing="false" onAction="#navigateProject" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Projects" textFill="WHITE">
+               <font>
+                  <Font name="Verdana" size="14.0" />
+               </font>
+            </Button>
             <Button fx:id="timeSlotButton" mnemonicParsing="false" onAction="#navigateTimeSlot" prefHeight="75.0" prefWidth="149.0" style="-fx-background-color: transparent; -fx-border-color: white; -fx-border-width: 0 0 2 0;" text="Free Slot" textFill="WHITE">
                <font>
                   <Font name="Verdana" size="14.0" />

@@ -1,8 +1,5 @@
 package app.zaidiboussebata.Control;
-import app.zaidiboussebata.Noyau.Categorie;
-import app.zaidiboussebata.Noyau.Etat;
-import app.zaidiboussebata.Noyau.Priorite;
-import app.zaidiboussebata.Noyau.SimpleTache;
+import app.zaidiboussebata.Noyau.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -20,6 +17,36 @@ public class AddTacheController {
     Etat etat = Etat.UNSCHEDULED ; // par defaut unsheduled
 
 
+    //------------------------------------------------------------------------------------
+
+    @FXML
+    public Button acceptBut ;
+    @FXML
+    public Button refuseBut ;
+    @FXML
+    public TextArea description;
+
+    @FXML
+    public TextField projectName;
+
+    //_---------_---------_---------_---------_---------_---------_---------_---------
+    public void addProjet(ActionEvent event){
+        navigateTo( addBut , "/app/zaidiboussebata/MoreTasks.fxml", "Schedule" , false);
+    }
+
+    /** accepter de planifier encore une autre tache
+     *
+     * @param event
+     */
+    public void acceptClick(ActionEvent event) {
+        navigateTo( acceptBut , "/app/zaidiboussebata/addTasksProjet.fxml", "Schedule" , false);
+
+    }
+
+    public void refuseClick(ActionEvent event) {
+        navigateTo( refuseBut , "/app/zaidiboussebata/ProjetPage.fxml", "Schedule" , false);
+
+    }
    // ---------------------------------Check boxes pour la page editTache--------------------------------
     @FXML
     public TextField tacheName;
@@ -285,7 +312,7 @@ public class AddTacheController {
             eta = etat;
         }
 
-        if (simple.modifieTache(pseudo + "_taches.ser", tacheList, tacheID.getText(), name, duree, deadlin, eta, prio, cate, typ)) {
+        if (simple.modifieTache( tacheList, tacheID.getText(), name, duree, deadlin, eta, prio, cate, typ)) {
 
             // on ferme la fenetre
             Stage currentStage = (Stage) editBut.getScene().getWindow();
@@ -302,7 +329,7 @@ public class AddTacheController {
 
         SimpleTache simple = new SimpleTache() ;
 
-       if (simple.supprimerTache(FICHIER_TACHE , tacheList , supID.getText() )){
+       if (simple.supprimerTache( tacheList , supID.getText() )){
            // on ferme la fenetre
            Stage currentStage = (Stage) removeBut.getScene().getWindow();
            currentStage.close();

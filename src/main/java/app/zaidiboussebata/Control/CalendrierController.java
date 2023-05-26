@@ -196,8 +196,8 @@ public class CalendrierController implements Initializable {
         int month = dateFocus.getMonth().getValue();
         // la liste des taches a afficher dans le planning
 
-       //  ZonedDateTime time4 = ZonedDateTime.of(2023, 05,19 , 19,0,0,0,dateFocus.getZone());
-       // calendarActivities.add(new CalendarActivity(time4 , "Yasmine" , 12345));
+        ZonedDateTime time4 = ZonedDateTime.of(2023, 05,19 , 19,0,0,0,dateFocus.getZone());
+        calendarActivities.add(new CalendarActivity(time4 , "Tache" , 12345));
 
         /*   Random random = new Random();
         for (int i = 0; i < 50; i++) {
@@ -215,10 +215,11 @@ public class CalendrierController implements Initializable {
     //    TacheController.initialize();
     }
     @FXML
+    public Button ProjectButton ;
+    @FXML
     public  void navigateProject(ActionEvent event){
 
-        navigateTo(tasksButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
-        //    TacheController.initialize();
+        navigateTo(ProjectButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
     }
 
     @FXML

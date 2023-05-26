@@ -45,7 +45,15 @@ public class Periode {
                     || (creneauDebut.equals(dPeriodeStart.toLocalTime())
                         && creneauFin.equals(fPeriodeEnd.toLocalTime())));
     }*/
-    public static boolean isDateInside(LocalDate date, LocalDate dPeriode, LocalDate fPeriode) {
+
+    /**
+     * retourne true si la date est entre le debut et la fin de la periode entrée
+     * @param date
+     * @param dPeriode
+     * @param fPeriode
+     * @return
+     */
+    public  boolean isDateInside(LocalDate date, LocalDate dPeriode, LocalDate fPeriode) {
 
 
         return ((date.isAfter(dPeriode) && date.isBefore(fPeriode))||date.equals(dPeriode)|| date.equals(fPeriode));

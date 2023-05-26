@@ -57,7 +57,7 @@ public class Planning implements Serializable {
 
             for (int j = 0; j < creneauLibreList.size(); j++) {
                 Creneau_libre creneau = creneauLibreList.get(j);
-                Duration dureeCreneau = Creneau_libre.calculeDuree(creneau.getDebut(), creneau.getFin());
+                Duration dureeCreneau = creneau.calculeDuree(creneau.getDebut(), creneau.getFin());
 
                 if (dureeCreneau.compareTo(tache.duree) >= 0) {
                     indicesCompatibles.add(j+i);
@@ -94,7 +94,7 @@ public class Planning implements Serializable {
      */
     public void plannifier_n_jours(LocalDate from,LocalDate to,int n,SimpleTache tache,Creneau_libre creneau,String FICHIER_HISTORIQUE_PLANNING) {
         List<HistoriquePlanning> historiquePlanList= Utilisateur.recupererObjetFichier(FICHIER_HISTORIQUE_PLANNING);
-
+       Periode periode1 = new Periode();
 
         List<Planning> listplanList = new ArrayList<>();
         HistoriquePlanning historiquePlanning = new HistoriquePlanning();
@@ -106,7 +106,7 @@ public class Planning implements Serializable {
         Planning plan = new Planning();
         plan.tache = tache;
         plan.creneau = creneau;
-        while (Periode.isDateInside(creneau.getDate(), from, to)) {
+        while (periode1.isDateInside(creneau.getDate(), from, to)) {
             creneau.setDate(plan.creneau.getDate().plusDays(n));
             System.out.println("\n| Date: " + plan.creneau.getDate());
 
@@ -155,7 +155,7 @@ public class Planning implements Serializable {
      * @return
      */
     public Boolean plannifier(LocalDate debut, LocalDate fin, List<SimpleTache> tacheList, List<Creneau_libre> CreneauLibreList, List<Planning> planningList) {
-
+Periode periode1 = new Periode();
         System.out.println("Debut == " + debut + " | fin == " + fin);
 
         Boolean trouve = false;
@@ -181,7 +181,7 @@ public class Planning implements Serializable {
         if (tache.deadline.isAfter(debut) || tache.deadline.equals(debut)) {
             // si le ddl est entre la periode
 
-            if (Periode.isDateInside(creneau.getDate(), debut, fin)) {
+            if (periode1.isDateInside(creneau.getDate(), debut, fin)) {
                 //pour chaque creneau on verifie si sa date est dans la periode
 
                 System.out.println("\n_______________________________| Creneau inside periode ");
@@ -223,7 +223,7 @@ public class Planning implements Serializable {
 
                         // Calculate the total duration of available Creneau_libre objects
                         for (Creneau_libre creneau1 : CreneauLibreList) {
-                            if (Periode.isDateInside(creneau1.getDate(), debut, fin)) {
+                            if (periode1.isDateInside(creneau1.getDate(), debut, fin)) {
                                 f = Duration.between(creneau1.getDebut(), creneau1.getFin());
                                 totalDuration = totalDuration.plus(f);
                             }
@@ -239,17 +239,19 @@ public class Planning implements Serializable {
                             while(j < CreneauLibreList.size() || tache.duree.isZero()) {
 
                                 Creneau_libre creneau1 = CreneauLibreList.get(j);
-                                if(Periode.isDateInside(creneau1.getDate(), debut, fin)) {
+                                if(periode1.isDateInside(creneau1.getDate(), debut, fin)) {
 
 
                                     Planning x = new Planning();
 
                                     Duration d = Duration.between(creneau1.getDebut(), creneau1.getFin());
+
                                     if(tache.duree.compareTo(d)<= 0) {
                                         System.out.println("\n=========="+tache.duree+" sghire"+d+"\n");
                                         Creneau_libre c = new Creneau_libre(creneau1.getDebut(), creneau1.getDebut().plusMinutes(tache.duree.toMinutes()), creneau1.getDate());
                                         creneau1.setDebut( creneau1.getDebut().plusMinutes(tache.duree.toMinutes()));
-                                        SimpleTache t = new SimpleTache(tache.nom+i, tache.duree , tache.deadline);
+                                        SimpleTache t = new SimpleTache(tache.nom+i, tache.duree , tache.deadline,Etat.IN_PROGRESS, tache.type , tache.categorie,tache.priorite );
+
                                         i++;
                                         x.tache = t;
                                         x.tache.etat = Etat.IN_PROGRESS;
@@ -262,8 +264,9 @@ public class Planning implements Serializable {
                                         break;
 
                                     }else{
+                                        
                                         x.creneau = creneau1;
-                                        SimpleTache t = new SimpleTache(tache.nom+i, d, tache.deadline);
+                                        SimpleTache t = new SimpleTache(tache.nom+i, d, tache.deadline,Etat.IN_PROGRESS, tache.type , tache.categorie,tache.priorite );
                                         i++;
                                         x.tache = t;
                                         x.tache.etat = Etat.IN_PROGRESS;

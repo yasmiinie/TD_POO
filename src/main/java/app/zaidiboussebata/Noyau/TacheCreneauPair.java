@@ -6,11 +6,18 @@ import java.util.*;
 public class TacheCreneauPair {
     private Tache tache;
     private List<Integer> indicesCreneaux;
+//---------------------------------------------------------------------------------------------------------
 
+    /**
+     *
+     * @param tache
+     * @param indicesCreneaux
+     */
     public TacheCreneauPair(Tache tache, List<Integer> indicesCreneaux) {
         this.tache = tache;
         this.indicesCreneaux = indicesCreneaux;
     }
+//---------------------------------------------------------------------------------------------------------
 
     public Tache getTache() {
         return tache;
@@ -19,7 +26,7 @@ public class TacheCreneauPair {
     public List<Integer> getIndicesCreneaux() {
         return indicesCreneaux;
     }
-
+// redifinition de toString
     @Override
     public String toString() {
         return "TacheCreneauPair{" +
@@ -27,7 +34,13 @@ public class TacheCreneauPair {
                 ", indicesCreneaux=" + indicesCreneaux +
                 '}';
     }
-    public static List<TacheCreneauPair> sortTacheCreneauPairs(List<TacheCreneauPair> inputList) {
+
+    /**
+     *  faire le filtrage
+     * @param inputList
+     * @return
+     */
+    public  List<TacheCreneauPair> sortTacheCreneauPairs(List<TacheCreneauPair> inputList) {
         List<TacheCreneauPair> sortedList = new ArrayList<>(inputList);
 
         Collections.sort(sortedList, new Comparator<TacheCreneauPair>() {

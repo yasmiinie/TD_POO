@@ -262,72 +262,6 @@ public class addSchedule {
 
 
 
-//-------------------------------------Modifier une tache-----------------------------------------------------------------------------------------------------
-
-    /**
-     * permet de faire des modifications de tous les champs d'une tache
-     *
-     * @param event
-     */
-    @FXML
-    public void editTache(ActionEvent event) {
-        // on lit la liste des taches
-        List<SimpleTache> tacheList = recupererObjetFichier(pseudo + "_taches.ser");
-
-        SimpleTache simple = new SimpleTache();
-
-        SimpleTache rechrcherTache = new SimpleTache();
-        rechrcherTache = simple.rechercherTache(tacheList, tacheID.getText());
-
-        String name = rechrcherTache.nom;
-        Duration duree = rechrcherTache.duree;
-        LocalDate deadlin = rechrcherTache.deadline;
-        Priorite prio = rechrcherTache.priorite;
-        Categorie cate = rechrcherTache.categorie;
-        Etat eta = rechrcherTache.etat;
-        String typ = rechrcherTache.type;
-
-
-        System.out.println(rechrcherTache.priorite);
-        System.out.println(rechrcherTache.type);
-        System.out.println(rechrcherTache.deadline);
-        System.out.println(rechrcherTache.nom);
-
-        if (checkName.isSelected()) {
-            name = tacheName.getText();
-            System.out.println("name selected");
-            System.out.println(tacheName.getText());
-        }
-        if (checkType.isSelected()) {
-            typ = type;
-        }
-        if (checkDuree.isSelected()) {
-            Duration duration = parseDuration(tacheDuree.getText());
-            duree = duration;
-
-        }
-        if (checkDDL.isSelected()) {
-            deadlin = ddl.getValue();
-        }
-        if (checkCat.isSelected()) {
-            cate = categorie;
-        }
-        if (checkPri.isSelected()) {
-            prio = priorite;
-        }
-        if (checkState.isSelected()) {
-            eta = etat;
-        }
-
-        if (simple.modifieTache(pseudo + "_taches.ser", tacheList, tacheID.getText(), name, duree, deadlin, eta, prio, cate, typ)) {
-
-            // on ferme la fenetre
-            Stage currentStage = (Stage) editBut.getScene().getWindow();
-            currentStage.close();
-        } else {
-            taskNotFoundClick();
-        }
-    }
     //-----------------------------------------Remove-----------------------------------
     @FXML
     public void removeTache(ActionEvent event) {
@@ -336,7 +270,7 @@ public class addSchedule {
 
         SimpleTache simple = new SimpleTache() ;
 
-        if (simple.supprimerTache(FICHIER_TACHE , tacheList , supID.getText() )){
+        if (simple.supprimerTache(tacheList , supID.getText() )){
             // on ferme la fenetre
             Stage currentStage = (Stage) removeBut.getScene().getWindow();
             currentStage.close();
@@ -391,9 +325,7 @@ public class addSchedule {
             }
 
         sauvegarderObjetFichier(pseudo+"_historiquePlanning.ser",historiquePlanList);
-        for(Planning plan : historiquePlanning.listPlanning) {
-            System.out.println("\n+ plan = nom : "+plan.tache.nom+"| Etat = "+plan.tache.etat+" | debut : "+plan.creneau.getDebut()+" | fin : "+plan.creneau.getFin()+" | date  : "+plan.creneau.getDate());
-        }
+
         navigateTo(acceptBut,"/app/zaidiboussebata/SchedulePage.fxml","Schedule" , true) ;
 
     }
@@ -402,9 +334,7 @@ public class addSchedule {
         Creneau_libre creneau = new  Creneau_libre();
 
         List<Creneau_libre> CreneauList = recupererObjetFichier(pseudo+"_creneau.ser");
-        System.out.println(toLocalTime(startSlot.getText()));
-        System.out.println(endSlot.getText());
-        System.out.println(toLocalTime(endSlot.getText()));
+
 
         if (creneau.createrCreneauLibre(pseudo+"_creneau.ser",toLocalTime(startSlot.getText()),toLocalTime(endSlot.getText()),dateSlot.getValue(),CreneauList)){
             // on ferme la fenetre
@@ -631,9 +561,6 @@ public class addSchedule {
        tacheList.add(simple) ;
        sauvegarderObjetFichier(pseudo+"_taches.ser", tacheList); // on sauvegarde dans le fichier
        planning.plannifier_n_jours(Starting.getValue() , Ending.getValue(), Integer.parseInt(every.getText()) , simple,creneauLibre , pseudo+"_historiquePlanning.ser");
-
-
-
 
 
        // on ferme la fenetre

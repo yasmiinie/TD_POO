@@ -27,23 +27,7 @@ public class Utilisateur implements Serializable{
 	public String getPseudo() {return pseudo;}
 	public void setPseudo(String pseudo) {this.pseudo = pseudo;}
 	
-	
-//--------------------------------| Login |--------------------------------------------------------//
-    /**
-     *  permet de la connexion de l'utilisateur par son pseudo
-     *  si le pseudo exist donc la connexion est faite sinon elle va affichier un message d'erreur
-     *
-     * @param UtilisateurList
-     */
-    public static void login(String pseudo, List<Utilisateur> UtilisateurList) {
-        
-        if (isPseudoExist(pseudo, UtilisateurList)) {
-            System.out.println("------------|+ Connexion réussie! +|-------------");
-        } else {
-            System.out.println(" Le pseudo n'existe pas. Veuillez réessayer ou créer un nouvel Utilisateur.");
-        }
-    }
-    
+
 //-------------------------------------| IsPseudoExist|--------------------------------------------------------//
 
     /**
@@ -66,7 +50,7 @@ public class Utilisateur implements Serializable{
      *
      * @param UtilisateurList
      */
-    public static void supprimerUtilisateur(String pseudo, List<Utilisateur> UtilisateurList) {
+    public void supprimerUtilisateur(String pseudo, List<Utilisateur> UtilisateurList) {
       
         Iterator<Utilisateur> iterator = UtilisateurList.iterator();
         boolean found = false;
@@ -97,7 +81,7 @@ public class Utilisateur implements Serializable{
      * @param pseudo
      * @param UtilisateurList
      */
-public static void createUtilisateur(String pseudo, List<Utilisateur> UtilisateurList) {
+public  void createUtilisateur(String pseudo, List<Utilisateur> UtilisateurList) {
     
    //Verification de pseudo si il exist
    if (isPseudoExist(pseudo, UtilisateurList)) {
@@ -117,7 +101,7 @@ public static void createUtilisateur(String pseudo, List<Utilisateur> Utilisateu
  * Permet d'afficher la liste des utilisateurs.
  * @param utilisateurList La liste des utilisateurs à afficher
  */
-public static void afficherUtilisateurs(List<Utilisateur> utilisateurList) {
+public  void afficherUtilisateurs(List<Utilisateur> utilisateurList) {
     System.out.println("Liste des utilisateurs :");
     if (utilisateurList.size() != 0) {
         for (int i = 0; i < utilisateurList.size(); i++) {

@@ -60,10 +60,11 @@ public class TacheController {
     public  ListView<String> liste ;
 
     @FXML
+    public Button ProjectButton ;
+    @FXML
     public  void navigateProject(ActionEvent event){
 
-        navigateTo(tasksButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
-        //    TacheController.initialize();
+        navigateTo(ProjectButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
     }
 
     /**
@@ -102,8 +103,8 @@ public class TacheController {
     }
     public void TodayTasks(ActionEvent event){
         liste.getItems().clear();
-
-        List<Planning> dateList = Journee.tacheOfDay(LocalDate.now(), pseudo+"_historiquePlanning");
+        Journee journee = new Journee();
+        List<Planning> dateList = journee.tacheOfDay(LocalDate.now(), pseudo+"_historiquePlanning");
         //affichage de la list
         if(dateList.size() ==0 ) {   liste.getItems().add("You dont have any taks")     ;return;}
         for(Planning plan : dateList) {
@@ -120,7 +121,7 @@ public class TacheController {
             liste.getItems().add("            -Date : "+plan.creneau.getDate());
             liste.getItems().add("                                 ");
         }
-        Etat etat = Journee.getEtatGlobal(dateList);
+        Etat etat = journee.getEtatGlobal(dateList);
         System.out.println("\n\nVotre etat de cette journee  est "+etat);
     }
 

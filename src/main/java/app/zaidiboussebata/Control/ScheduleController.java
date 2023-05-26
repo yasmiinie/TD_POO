@@ -78,20 +78,21 @@ public class ScheduleController {
 
     }
     public void editClick(ActionEvent event){
-        navigateTo( editBut , "/app/zaidiboussebata/addTask.fxml", "Edit your Schedule" , false);
+        navigateTo( editBut , "/app/zaidiboussebata/editTask.fxml", "Edit your Schedule" , false);
 
     }
     public void removeClick(ActionEvent event){
-        navigateTo( supBut , "/app/zaidiboussebata/addTask.fxml", "Remove from your Schedule" , false);
+        navigateTo( supBut , "/app/zaidiboussebata/removeTask.fxml", "Remove from your Schedule" , false);
     }
     public void periodicClick(ActionEvent event){
-        navigateTo( supBut , "/app/zaidiboussebata/periodic.fxml", "Remove from your Schedule" , false);
+        navigateTo( periodicBut , "/app/zaidiboussebata/periodic.fxml", "Remove from your Schedule" , false);
     }
+    @FXML
+    public Button ProjectButton ;
     @FXML
     public  void navigateProject(ActionEvent event){
 
-        navigateTo(tasksButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
-        //    TacheController.initialize();
+        navigateTo(ProjectButton,"/app/zaidiboussebata/ProjetPage.fxml","Tasks Page" , true) ;
     }
 
     /**

@@ -17,7 +17,7 @@ public class Creneau_libre implements Serializable{
 	private LocalTime debut;
 	private LocalTime fin;
     private LocalDate date;
-	public static Duration dureeMin = Duration.ofMinutes(30);
+	public static Duration dureeMin = Duration.ofMinutes(20);
 
 	
 //------------------------------| Constructeur |------------------------------------------------//	
@@ -50,7 +50,7 @@ public class Creneau_libre implements Serializable{
 	 * @param fin
 	 * @return Duree 
 	 */
-	 public static Duration calculeDuree(LocalTime debut, LocalTime fin) {
+	 public  Duration calculeDuree(LocalTime debut, LocalTime fin) {
 	        return Duration.between(debut, fin);
 	 }
 
@@ -101,7 +101,7 @@ public class Creneau_libre implements Serializable{
 	 */
 	 public Boolean createrCreneauLibre(String fichier,LocalTime debut  ,LocalTime fin,LocalDate date, List<Creneau_libre> CreneauLibreList) {
 
-		 Duration duree = Creneau_libre.calculeDuree(debut, fin);
+		 Duration duree = calculeDuree(debut, fin);
 		 System.out.println(debut);
 		 System.out.println(fin);
 		 System.out.println("duree ===="+duree);

@@ -1,5 +1,6 @@
 package app.zaidiboussebata.Noyau;
 
+import app.zaidiboussebata.Control.LogInController;
 import app.zaidiboussebata.Noyau.*;
 
 import java.io.Serializable;
@@ -8,6 +9,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import static app.zaidiboussebata.Control.LogInController.pseudo;
+import static app.zaidiboussebata.Control.LogInController.recupererObjetFichier;
 import static app.zaidiboussebata.Noyau.Utilisateur.sauvegarderObjetFichier;
 
 
@@ -22,6 +25,11 @@ public abstract class Tache implements Serializable {
 
 //----------------------------------------------------------------------------------------
 
+    /**
+     * permet de permuter entre deux taches de meme ddl pour l'utiliser dans la replanification
+     * (si l'utilisateur ne valide pas le planning )
+     * @param tacheList
+     */
     public static void permuterTachesMemeDeadline(List<SimpleTache> tacheList) {
         Random random = new Random();
         int i = 0;
@@ -103,29 +111,75 @@ public abstract class Tache implements Serializable {
 
 //-----------------------------------| supprimerTache |------------------------------------//     
      /**
-      * permet de supprimer une tache par son nom a partir de la lists des taches
-      * @param fichier
+      * permet de supprimer une tache dans le planning et dans les taches par son nom a partir de la lists des taches
+
       * @param tacheList
       * @param nomTache
       */
-     public Boolean supprimerTache(String fichier,List<SimpleTache> tacheList, String nomTache) {
-    	    Tache tacheToDelete = null;
-    	    for (Tache tache : tacheList) {
-    	        if (tache.nom.equalsIgnoreCase(nomTache)) {
-    	            tacheToDelete = tache;
-    	            break;
-    	        }
-    	    }
-    	    if (tacheToDelete != null) {
-    	        tacheList.remove(tacheToDelete);
-    	        sauvegarderObjetFichier(fichier, tacheList);
-    	        System.out.println("La tâche a été supprimée avec succès.");
-                return true;
-    	    } else {
-    	        System.out.println("La tâche spécifiée n'a pas été trouvée.");
-                return false;
-    	    }
-    	}
+     public Boolean supprimerTache(List<SimpleTache> tacheList, String nomTache) {
+         Tache tacheToDelete = null;
+         Planning ToDelete = null;
+
+         // on cherche la tache a supprimer
+         for (Tache tache : tacheList) {
+             if (tache.nom.equalsIgnoreCase(nomTache)) {
+                 tacheToDelete = tache;
+                 break;
+             }
+         }
+
+         if (tacheToDelete != null) {
+             //si elle existe dans le fichier des taches
+
+             // Si elle existe je la cherche dans le dernier planning
+             Planning planning = new Planning();
+             List<HistoriquePlanning> historiquePlanList = recupererObjetFichier(pseudo + "_historiquePlanning.ser");
+             HistoriquePlanning history = new HistoriquePlanning();
+
+             // pour recuperer le dernier planning
+             HistoriquePlanning historiquePlanning;
+             if ((historiquePlanList.size()) > 0) {
+                 // pour recuperer le dernier planning s'il existe
+                 historiquePlanning = history.recupererHistorique(historiquePlanList, historiquePlanList.size() - 1);
+
+                 for (Planning plan : historiquePlanning.listPlanning) {
+                     if (plan.tache.nom.equalsIgnoreCase(nomTache)) {
+                         ToDelete = plan;
+                         break;
+                     }
+                 }
+
+                 tacheList.remove(tacheToDelete); // on la supprime de la liste des taches
+                 sauvegarderObjetFichier(pseudo + "_taches.ser", tacheList);
+
+                 if (ToDelete != null) {
+                     if(historiquePlanning.listPlanning.size() == 1){
+                         // il ya un seul element dedans
+                         historiquePlanList.remove(historiquePlanning);
+                     }
+                     historiquePlanning.listPlanning.remove(ToDelete); // on la supprime de la liste des taches
+                     sauvegarderObjetFichier(pseudo + "_historiquePlanning.ser", historiquePlanList);
+
+
+                 }
+             } else {
+
+                 tacheList.remove(tacheToDelete); // on la supprime de la liste des taches
+                 Utilisateur.sauvegarderObjetFichier(pseudo + "_taches.ser", tacheList);
+
+             }
+             System.out.println("La tâche a été supprimer.");
+             return true;
+
+
+         } else {
+             System.out.println("La tâche spécifiée n'a pas été trouvée.");
+             return false;
+         }
+
+     }
+
+
 //--------------------------------------Rechercher une tache--------------------------------------
 
      /**
@@ -137,7 +191,8 @@ public abstract class Tache implements Serializable {
       */
      public SimpleTache rechercherTache(List<SimpleTache> tacheList ,String nomTache ){
        SimpleTache tache = new SimpleTache();
-       int i = 0;
+
+         int i = 0;
          // on cherche la tache par son nom
        while(i < tacheList.size()){
 
@@ -155,9 +210,8 @@ public abstract class Tache implements Serializable {
         //-----------------------------------| modifierTache |------------------------------------//
 
     /**
-     * permet de modifier une tache dans la lists des taches
-     *
-     * @param fichier le nom du fichier de l'utilisateur pour ecrire dedans
+     * permet de modifier une tache dans la lists des taches et dans le planning
+     * // mettre a jour la tache
      * @param tacheList la liste des taches
      * @param ID  l identifiant de la tache a modifier (son nom )
      * @param nomTache le nouveau nom de la tache
@@ -169,12 +223,12 @@ public abstract class Tache implements Serializable {
      * @param type
      */
 
-     public Boolean modifieTache(String fichier,List<SimpleTache> tacheList, String ID , String nomTache , Duration duree , LocalDate ddl,Etat etat , Priorite priorite , Categorie categorie ,String type) {
+     public Boolean modifieTache(List<SimpleTache> tacheList, String ID , String nomTache , Duration duree , LocalDate ddl,Etat etat , Priorite priorite , Categorie categorie ,String type) {
 
-            // mettre a jour la tache
-
-        Tache tacheToModify = null;
-        for (Tache tache : tacheList) {
+       // on cherche la tache a modifier
+         SimpleTache tacheToModify = null;
+         SimpleTache ToModify = null;
+        for (SimpleTache tache : tacheList) {
             if (tache.nom.equalsIgnoreCase(ID)) {
                 tacheToModify = tache;
                 break;
@@ -182,18 +236,66 @@ public abstract class Tache implements Serializable {
         }
         if (tacheToModify != null) {
 
+            // Si elle existe je la cherche dans le dernier planning
+            Planning planning = new Planning();
+            List<HistoriquePlanning> historiquePlanList= recupererObjetFichier(pseudo+"_historiquePlanning.ser");
+            HistoriquePlanning history = new HistoriquePlanning();
 
-            // Update the task
-            tacheToModify.nom = nomTache;
-            tacheToModify.duree = duree;
-            tacheToModify.deadline = ddl;
-            tacheToModify.priorite = priorite;
-            tacheToModify.etat = etat;
-            tacheToModify.categorie = categorie;
-            tacheToModify.type = type ;
+            // pour recuperer le dernier planning
+            HistoriquePlanning historiquePlanning;
+            if((historiquePlanList.size()) >0){
+                // pour recuperer le dernier planning s'il existe
+                historiquePlanning = history.recupererHistorique(historiquePlanList, historiquePlanList.size()-1);
+
+                for (Planning plan :historiquePlanning.listPlanning) {
+                    if (plan.tache.nom.equalsIgnoreCase(ID)) {
+                       ToModify= plan.tache ;
+                        break;
+                    }
+                }
+                tacheToModify.nom = nomTache;
+                tacheToModify.duree = duree;
+                tacheToModify.deadline = ddl;
+                tacheToModify.priorite = priorite;
+                tacheToModify.etat = etat;
+                tacheToModify.categorie = categorie;
+                tacheToModify.type = type ;
 
 
-            Utilisateur.sauvegarderObjetFichier(fichier, tacheList);
+
+
+                Utilisateur.sauvegarderObjetFichier(pseudo+"_taches.ser", tacheList);
+                if (ToModify != null){
+                    ToModify.nom = nomTache;
+                    ToModify.duree = duree;
+                    ToModify.deadline = ddl;
+                    ToModify.priorite = priorite;
+                    ToModify.etat = etat;
+                    ToModify.categorie = categorie;
+                    ToModify.type = type ;
+                    planning.tache = ToModify ;
+                   // historiquePlanning.listPlanning.add(planning);
+                    LogInController.sauvegarderObjetFichier(pseudo+"_historiquePlanning.ser",historiquePlanList);
+
+                }
+            }
+            else {
+                tacheToModify.nom = nomTache;
+                tacheToModify.duree = duree;
+                tacheToModify.deadline = ddl;
+                tacheToModify.priorite = priorite;
+                tacheToModify.etat = etat;
+                tacheToModify.categorie = categorie;
+                tacheToModify.type = type ;
+
+
+                Utilisateur.sauvegarderObjetFichier(pseudo+"_taches.ser", tacheList);
+
+            }
+
+
+
+
             System.out.println("La tâche a été modifiée avec succès.");
             return true;
 

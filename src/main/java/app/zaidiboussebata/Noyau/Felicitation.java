@@ -7,7 +7,13 @@ import java.util.Map;
 public class Felicitation {
     public static int nbr_min_tache = 1;//nombre minimal des taches a realisee par jour
 
-    public static void updateBadgeCounts(Map<LocalDate, Integer> completedTasksByDay, Map<Badge, Integer> badgeCounts, int x) {
+    /**
+     * mettre a jour le nombre de badge acomplis
+     * @param completedTasksByDay
+     * @param badgeCounts
+     * @param x
+     */
+    public  void updateBadgeCounts(Map<LocalDate, Integer> completedTasksByDay, Map<Badge, Integer> badgeCounts, int x) {
         int consecFelicitation = 0;
         int consecGood = 0;
         int consecVeryGood = 0;
